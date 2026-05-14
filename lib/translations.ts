@@ -47,9 +47,10 @@ export const translations = {
       sessionFee: "Per Session Fee",
       breakdown: "Fee Breakdown",
       baseFee: "Base Fee",
-      distanceSurcharge: "Distance & Fuel Charge",
+      distanceSurcharge: "Distance Charge",
       frequencySurcharge: "Frequency Surcharge",
       groupDiscount: "Group Discount",
+      studentCharge: "Student Charge",
       fuelCharge: "Fuel Charge",
       total: "Total Amount",
       summary: "Your Selected Details"
@@ -114,6 +115,7 @@ export const translations = {
       frequencySurcharge: "අතිරේක සැසි ශුල්කය",
       groupDiscount: "සමූහ ছাড",
       fuelCharge: "ඉන්ධන ගාස්තුව",
+      studentCharge: "ශිෂ්‍ය ශුල්කය",
       total: "සම්පූර්ණ ගාස්තුව",
       summary: "ඔබේ තෝරාගැනීම"
     },

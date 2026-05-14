@@ -142,7 +142,7 @@ export function generateWhatsAppMessage(
 *📊 Fee Breakdown:*
 • Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
 • Distance Charge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
-• Fuel Charge (${breakdown.studentMultiplier}x students): Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
+• Student Charge (${breakdown.studentMultiplier}x students): Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
 • Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
 ${breakdown.groupDiscount > 0 ? `• Group Discount: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')}\n` : ''}
 *Contact: 0787124080*`
