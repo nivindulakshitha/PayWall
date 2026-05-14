@@ -21,7 +21,7 @@ export interface FeeBreakdown {
 const BASE_FEES: Record<string, number> = {
   '6-9': 2500,
   'ol': 3500,
-  'al': 5000,
+  'al': 6000,
 }
 
 const DISTANCE_CONSTANT_KM = 8

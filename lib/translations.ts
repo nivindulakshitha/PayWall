@@ -27,7 +27,7 @@ export const translations = {
     grades: {
       "6-9": "Grade 6-9 (Rs. 2,500)",
       "ol": "O/L Grade 10-11 (Rs. 3,500)",
-      "al": "A/L Grade 12-13 (Rs. 5,000)"
+      "al": "A/L Grade 12-13 (Rs. 6,000)"
     },
     methods: {
       online: "Online",
@@ -90,7 +90,7 @@ export const translations = {
     grades: {
       "6-9": "ශ්‍රේණිය 6-9 (රු. 2,500)",
       "ol": "ඔ/ල් ශ්‍රේණිය 10-11 (රු. 3,500)",
-      "al": "ඇ/ල් ශ්‍රේණිය 12-13 (රු. 5,000)"
+      "al": "ඇ/ල් ශ්‍රේණිය 12-13 (රු. 6,000)"
     },
     methods: {
       online: "අන්තර්ජාලය",
