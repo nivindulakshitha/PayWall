@@ -23,6 +23,7 @@ export const translations = {
       method: "Class Method",
       frequency: "Sessions per Week",
       students: "Number of Students",
+      hours: "Class Duration (Hours)",
       payingFrequency: "Paying Frequency"
     },
     grades: {
@@ -64,6 +65,7 @@ export const translations = {
       enterDistance: "Enter distance from Wariyapola",
       selectMethod: "Choose online or physical classes",
       selectFrequency: "Select session frequency",
+      selectHours: "Select class duration in hours",
       selectStudents: "Specify number of students"
     },
     payingFrequencies: {
@@ -89,6 +91,7 @@ export const translations = {
       location: "වාරියපොල නගරයට දුර (කි.මී.)",
       method: "පන්ති ක්‍රමය",
       frequency: "සතිහ සැසි",
+      hours: "පන්තිවල තිස්සේ (පැය)",
       students: "ශිෂ්‍ය සංඛ්‍යාව",
       payingFrequency: "ගාස්තු ගෙවීමේ සංඛ්‍යාතය"
     },
@@ -131,6 +134,7 @@ export const translations = {
       enterDistance: "වාරියපොල සිට ඔබේ නිවසට දුර ඇතුළු කරන්න",
       selectMethod: "අන්තර්ජාලය හෝ සිටින්න පන්තිය තෝරන්න",
       selectFrequency: "සතිපතින සැසි සංඛ්‍යාව තෝරන්න",
+      selectHours: "පන්තිවල තිස්සේ තෝරන්න",
       selectStudents: "ශිෂ්‍ය සංඛ්‍යාව තෝරන්න"
     },
     payingFrequencies: {
