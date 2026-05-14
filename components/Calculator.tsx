@@ -20,6 +20,7 @@ export default function Calculator() {
     method: 'physical',
     frequency: 1,
     students: 1,
+    hours: undefined, // Will use default based on grade
   })
 
   const breakdown = calculateFees(inputs)
@@ -29,6 +30,7 @@ export default function Calculator() {
     { id: 'location', label: t('steps.location') },
     { id: 'method', label: t('steps.method') },
     { id: 'frequency', label: t('steps.frequency') },
+    { id: 'hours', label: t('steps.hours') },
     { id: 'students', label: t('steps.students') },
   ]
 

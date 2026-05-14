@@ -13,6 +13,7 @@ export const translations = {
       location: "Location Details",
       method: "Class Method",
       frequency: "Session Frequency",
+      hours: "Class Duration",
       students: "Number of Students",
       summary: "Fee Summary"
     },
@@ -36,6 +37,7 @@ export const translations = {
     buttons: {
       calculate: "Calculate Fee",
       shareWhatsApp: "Share via WhatsApp",
+      openApp: "Open Calculator",
       reset: "Start Over",
       next: "Next",
       back: "Back",
@@ -44,6 +46,7 @@ export const translations = {
     },
     results: {
       monthlyFee: "Monthly Fee",
+      perStudentFee: "Per Student Fee",
       sessionFee: "Per Session Fee",
       breakdown: "Fee Breakdown",
       baseFee: "Base Fee",
@@ -52,6 +55,7 @@ export const translations = {
       groupDiscount: "Group Discount",
       studentCharge: "Student Charge",
       fuelCharge: "Fuel Charge",
+      hoursSurcharge: "Extra Hours Surcharge",
       total: "Total Amount",
       summary: "Your Selected Details"
     },
@@ -100,6 +104,7 @@ export const translations = {
     buttons: {
       calculate: "ගාස්තු ගණනය කරන්න",
       shareWhatsApp: "WhatsApp හි බෙදා ගන්න",
+      openApp: "ගණනය කරන්න",
       reset: "නැවත ආරම්භ කරන්න",
       next: "ඊළඟ",
       back: "ආපසු",
@@ -108,6 +113,7 @@ export const translations = {
     },
     results: {
       monthlyFee: "මාසික ගාස්තුව",
+      perStudentFee: "එක් ශිෂ්‍යයට ගාස්තුව",
       sessionFee: "එක් සැසියට ගාස්තුව",
       breakdown: "ගාස්තු විස්තර",
       baseFee: "මූල ගාස්තුව",
@@ -115,6 +121,7 @@ export const translations = {
       frequencySurcharge: "අතිරේක සැසි ශුල්කය",
       groupDiscount: "සමූහ ছাড",
       fuelCharge: "ඉන්ධන ගාස්තුව",
+      hoursSurcharge: "අතිරේක පැයවල ශුල්කය",
       studentCharge: "ශිෂ්‍ය ශුල්කය",
       total: "සම්පූර්ණ ගාස්තුව",
       summary: "ඔබේ තෝරාගැනීම"
