@@ -33,7 +33,8 @@ const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
 }
 
 const DISTANCE_CONSTANT_KM = 8
-const DISTANCE_CHARGE_PER_KM = 50 // Rs per km per session
+const FUEL_CHARGE_PER_KM = 10 // Rs per km (will be multiplied by 2 for round trip)
+const FUEL_ROUND_TRIP_MULTIPLIER = 2 // For come and go
 const FREQUENCY_SURCHARGE_PERCENT = 0.1 // 10% per extra session
 const GROUP_DISCOUNTS: Record<number, number> = {
   1: 0,
@@ -41,7 +42,6 @@ const GROUP_DISCOUNTS: Record<number, number> = {
   3: 0.10, // -10% for 3+
 }
 const SESSIONS_PER_MONTH = 4.33 // Average weeks in a month
-const FUEL_RATE_PER_KM = 50 // Rs per km per session
 
 export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const { grade, distance, method, frequency, students } = inputs
@@ -55,8 +55,9 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const totalDistance = distance + DISTANCE_CONSTANT_KM
 
   if (method === 'physical') {
-    // Distance charge: Monthly fixed = (distance + 8km) × 50 Rs/km
-    distanceSurcharge = totalDistance * DISTANCE_CHARGE_PER_KM
+    // Fuel charge: (distance + 8km) × 2 (round trip) × Rs. 10/km × frequency × 4 weeks
+    const roundTripDistance = totalDistance * FUEL_ROUND_TRIP_MULTIPLIER
+    distanceSurcharge = roundTripDistance * FUEL_CHARGE_PER_KM * frequency * 4
     // Student charge: Grade-based multiplier × number of students
     const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
     fuelCharge = studentMultiplierRate * students
