@@ -19,8 +19,8 @@ export interface FeeBreakdown {
 }
 
 const BASE_FEES: Record<string, number> = {
-  '6-9': 2500,
-  'ol': 3500,
+  '6-9': 2000,
+  'ol': 4000,
   'al': 6000,
 }
 
@@ -42,13 +42,14 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const baseFee = BASE_FEES[grade] || BASE_FEES['6-9']
 
   // Distance & Fuel charge (only for physical, add 8km constant)
-  // Rs. 30/km per session (includes both distance and fuel as single charge)
+  // Rs. 30/km per session × number of students
+  // Multiplied by number of students - more students = higher transportation cost
   let distanceSurcharge = 0
   if (method === 'physical') {
     const totalDistance = distance + DISTANCE_CONSTANT_KM
     const monthlySessionCount = frequency * SESSIONS_PER_MONTH
-    // Single charge for transportation: 30 Rs/km per session
-    distanceSurcharge = totalDistance * 30 * monthlySessionCount
+    // Single charge for transportation: 30 Rs/km per session × students
+    distanceSurcharge = totalDistance * 30 * monthlySessionCount * students
   }
 
   // Frequency surcharge (+10% per extra session beyond 1x/week)

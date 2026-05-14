@@ -25,8 +25,8 @@ export const translations = {
       payingFrequency: "Paying Frequency"
     },
     grades: {
-      "6-9": "Grade 6-9 (Rs. 2,500)",
-      "ol": "O/L Grade 10-11 (Rs. 3,500)",
+      "6-9": "Grade 6-9 (Rs. 2,000)",
+      "ol": "O/L Grade 10-11 (Rs. 4,000)",
       "al": "A/L Grade 12-13 (Rs. 6,000)"
     },
     methods: {
@@ -88,8 +88,8 @@ export const translations = {
       payingFrequency: "ගාස්තු ගෙවීමේ සංඛ්‍යාතය"
     },
     grades: {
-      "6-9": "ශ්‍රේණිය 6-9 (රු. 2,500)",
-      "ol": "ඔ/ල් ශ්‍රේණිය 10-11 (රු. 3,500)",
+      "6-9": "ශ්‍රේණිය 6-9 (රු. 2,000)",
+      "ol": "ඔ/ල් ශ්‍රේණිය 10-11 (රු. 4,000)",
       "al": "ඇ/ල් ශ්‍රේණිය 12-13 (රු. 6,000)"
     },
     methods: {
