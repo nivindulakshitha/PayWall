@@ -58,9 +58,8 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   if (method === 'physical') {
     // Distance charge: 30 Rs/km per session (shared base transportation cost)
     distanceSurcharge = totalDistance * 30 * monthlySessionCount
-    // Fuel charge: Fixed amount per student based on grade level
-    const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
-    fuelCharge = studentMultiplierRate * students
+    // Fuel charge: Distance × 30 Rs/km × number of students (per student fuel cost)
+    fuelCharge = totalDistance * 30 * students
   }
 
   // Frequency surcharge (+10% per extra session beyond 1x/week)
