@@ -39,6 +39,7 @@ export const translations = {
       reset: "Start Over",
       next: "Next",
       back: "Back",
+      adjust: "Adjust",
       toggleLanguage: "සිංහල"
     },
     results: {
@@ -101,6 +102,7 @@ export const translations = {
       reset: "නැවත ආරම්භ කරන්න",
       next: "ඊළඟ",
       back: "ආපසු",
+      adjust: "සකස් කරන්න",
       toggleLanguage: "English"
     },
     results: {

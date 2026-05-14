@@ -41,16 +41,14 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   // Base fee
   const baseFee = BASE_FEES[grade] || BASE_FEES['6-9']
 
-  // Distance & Fuel charge combined (only for physical, add 8km constant)
-  // Distance charge = Rs. 30/km per session
-  // Fuel charge = Rs. 30/km per session (same as distance)
-  // Total = 30 × 2 = Rs. 60/km per session
+  // Distance & Fuel charge (only for physical, add 8km constant)
+  // Rs. 30/km per session (includes both distance and fuel as single charge)
   let distanceSurcharge = 0
   if (method === 'physical') {
     const totalDistance = distance + DISTANCE_CONSTANT_KM
     const monthlySessionCount = frequency * SESSIONS_PER_MONTH
-    // Combine distance and fuel: 60 Rs/km per session
-    distanceSurcharge = totalDistance * 60 * monthlySessionCount
+    // Single charge for transportation: 30 Rs/km per session
+    distanceSurcharge = totalDistance * 30 * monthlySessionCount
   }
 
   // Frequency surcharge (+10% per extra session beyond 1x/week)
@@ -111,23 +109,27 @@ export function generateWhatsAppMessage(
   frequencyLabel: string,
   studentLabel: string
 ): string {
-  return `Class Fee Calculator
+  const totalDistance = inputs.distance + DISTANCE_CONSTANT_KM
+  
+  return `*📚 Class Fee Calculator*
 
-📚 ${gradeLabel}
-🌐 ${methodLabel}
-📍 Distance: ${inputs.distance + DISTANCE_CONSTANT_KM}km
-📅 ${frequencyLabel}
-👥 ${studentLabel}
+*Selected Details:*
+• Grade: ${gradeLabel}
+• Method: ${methodLabel}
+• Distance: ${totalDistance}km
+• Frequency: ${frequencyLabel}
+• Students: ${studentLabel}
 
-💰 *Monthly Fee:* Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}
-💵 *Per Session Fee:* Rs. ${breakdown.sessionFee.toLocaleString('en-LK')}
+*💰 Fee Summary:*
+┌─────────────────────────────
+│ Monthly Fee: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
+│ Per Session: *Rs. ${breakdown.sessionFee.toLocaleString('en-LK')}*
+└─────────────────────────────
 
-📊 *Fee Breakdown:*
+*📊 Fee Breakdown:*
 • Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
 • Distance Surcharge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
 • Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
-• Fuel Charge: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
-• Group Discount: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')}
-
-Contact: 0787124080`
+${breakdown.groupDiscount > 0 ? `• Group Discount: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')}\n` : ''}
+*Contact: 0787124080*`
 }
