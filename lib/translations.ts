@@ -38,6 +38,7 @@ export const translations = {
     buttons: {
       calculate: "Calculate Fee",
       shareWhatsApp: "Share via WhatsApp",
+      copyClipboard: "Copy to Clipboard",
       openApp: "Open Calculator",
       reset: "Start Over",
       next: "Next",
@@ -66,7 +67,8 @@ export const translations = {
       selectMethod: "Choose online or physical classes",
       selectFrequency: "Select session frequency",
       selectHours: "Select class duration in hours",
-      selectStudents: "Specify number of students"
+      selectStudents: "Specify number of students",
+      copiedToClipboard: "Copied to clipboard!"
     },
     payingFrequencies: {
       monthly: "Monthly",
@@ -107,6 +109,7 @@ export const translations = {
     buttons: {
       calculate: "ගාස්තු ගණනය කරන්න",
       shareWhatsApp: "WhatsApp හි බෙදා ගන්න",
+      copyClipboard: "පසුරු පුවරුවට පිටපත් කරන්න",
       openApp: "ගණනය කරන්න",
       reset: "නැවත ආරම්භ කරන්න",
       next: "ඊළඟ",
@@ -135,7 +138,8 @@ export const translations = {
       selectMethod: "අන්තර්ජාලය හෝ සිටින්න පන්තිය තෝරන්න",
       selectFrequency: "සතිපතින සැසි සංඛ්‍යාව තෝරන්න",
       selectHours: "පන්තිවල තිස්සේ තෝරන්න",
-      selectStudents: "ශිෂ්‍ය සංඛ්‍යාව තෝරන්න"
+      selectStudents: "ශිෂ්‍ය සංඛ්‍යාව තෝරන්න",
+      copiedToClipboard: "පසුරු පුවරුවට පිටපත් විය!"
     },
     payingFrequencies: {
       monthly: "මාසිකව",

@@ -231,17 +231,6 @@ export default function Calculator() {
 
           <FeeBreakdown breakdown={breakdown} />
           <WhatsAppShare inputs={inputs} breakdown={breakdown} />
-
-          <div className="flex gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleReset}
-              className="flex-1 px-6 py-3 bg-gray-600 text-white rounded-lg font-semibold hover:bg-gray-700 transition-all"
-            >
-              {t('buttons.reset')}
-            </motion.button>
-          </div>
         </motion.div>
       )}
     </div>
