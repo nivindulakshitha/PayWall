@@ -46,60 +46,56 @@ const FUEL_RATE_PER_KM = 50 // Rs per km per session
 export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const { grade, distance, method, frequency, students } = inputs
 
-  // Base fee per session
+  // Base fee (monthly)
   const baseFee = BASE_FEES[grade] || BASE_FEES['6-9']
-  const baseSessionFee = baseFee / 4  // Spread base fee across 4 weeks
 
-  // Distance & Fuel charges (only for physical, add 8km constant)
+  // Distance & Student charges (only for physical, add 8km constant)
   let distanceSurcharge = 0
   let fuelCharge = 0
   const totalDistance = distance + DISTANCE_CONSTANT_KM
 
   if (method === 'physical') {
-    // Distance charge: Monthly fixed charge = (distance + 8km) × 50 Rs/km, spread to per-session
-    distanceSurcharge = (totalDistance * DISTANCE_CHARGE_PER_KM) / 4
-    // Fuel charge: Grade-based student multiplier × number of students, spread to per-session
+    // Distance charge: Monthly fixed = (distance + 8km) × 50 Rs/km
+    distanceSurcharge = totalDistance * DISTANCE_CHARGE_PER_KM
+    // Student charge: Grade-based multiplier × number of students
     const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
-    fuelCharge = (studentMultiplierRate * students) / 4
+    fuelCharge = studentMultiplierRate * students
   }
 
-  // Frequency surcharge per session (+10% per extra session beyond 1x/week)
+  // Frequency surcharge (+10% per extra session beyond 1x/week)
   let frequencySurcharge = 0
   if (frequency > 1) {
     const extraSessions = frequency - 1
-    frequencySurcharge = (baseFee * FREQUENCY_SURCHARGE_PERCENT * extraSessions) / 4
+    frequencySurcharge = baseFee * FREQUENCY_SURCHARGE_PERCENT * extraSessions
   }
 
-  // Per-session subtotal before discount
-  const perSessionSubtotal = baseSessionFee + distanceSurcharge + fuelCharge + frequencySurcharge
+  // Monthly subtotal before discount
+  const subtotalBeforeDiscount = baseFee + distanceSurcharge + fuelCharge + frequencySurcharge
 
   // Group discount (-5% for 2, -10% for 3+)
   const discountRate = students >= 3 ? 0.10 : students === 2 ? 0.05 : 0
-  const perSessionDiscount = perSessionSubtotal * discountRate
+  const groupDiscount = subtotalBeforeDiscount * discountRate
 
-  // Per-session fee after discount
-  let sessionFee = perSessionSubtotal - perSessionDiscount
+  // Monthly fee
+  let monthlyFee = subtotalBeforeDiscount - groupDiscount
+
+  // Round monthly fee to nearest 500
+  monthlyFee = roundToNearest500(monthlyFee)
+
+  // Per-session fee: Monthly fee ÷ (sessions per week × 4 weeks)
+  const totalSessionsPerMonth = frequency * 4
+  let sessionFee = monthlyFee / totalSessionsPerMonth
   
   // Round session fee to nearest 50
   sessionFee = Math.ceil(sessionFee / 50) * 50
 
-  // Calculate monthly fee: Session fee × sessions per week × 4
-  let monthlyFee = sessionFee * frequency * 4
-
-  // For display: calculate total charges as monthly amounts
-  const monthlyDistanceSurcharge = distanceSurcharge * frequency * 4
-  const monthlyFuelCharge = fuelCharge * frequency * 4
-  const monthlyFrequencySurcharge = frequencySurcharge * frequency * 4
-  const monthlyBaseFee = baseSessionFee * frequency * 4
-  const monthlyGroupDiscount = perSessionDiscount * frequency * 4
-
   return {
-    baseFee: monthlyBaseFee,
-    distanceSurcharge: monthlyDistanceSurcharge,
-    fuelCharge: monthlyFuelCharge,
-    frequencySurcharge: monthlyFrequencySurcharge,
-    groupDiscount: monthlyGroupDiscount,
-    monthlyFee,
+    baseFee,
+    distanceSurcharge,
+    fuelCharge,
+    frequencySurcharge,
+    groupDiscount,
+    monthlyFee: sessionFee * totalSessionsPerMonth, // Recalculate to match rounded session fee
     sessionFee,
     studentMultiplier: students,
     distanceKm: totalDistance,
