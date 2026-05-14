@@ -33,7 +33,7 @@ const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
 }
 
 const DISTANCE_CONSTANT_KM = 8
-const DISTANCE_CHARGE_PER_KM = 30 // Rs per km per session
+const DISTANCE_CHARGE_PER_KM = 50 // Rs per km per session
 const FREQUENCY_SURCHARGE_PERCENT = 0.1 // 10% per extra session
 const GROUP_DISCOUNTS: Record<number, number> = {
   1: 0,
@@ -41,7 +41,7 @@ const GROUP_DISCOUNTS: Record<number, number> = {
   3: 0.10, // -10% for 3+
 }
 const SESSIONS_PER_MONTH = 4.33 // Average weeks in a month
-const FUEL_RATE_PER_KM = 30 // Rs per km per session
+const FUEL_RATE_PER_KM = 50 // Rs per km per session
 
 export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const { grade, distance, method, frequency, students } = inputs
