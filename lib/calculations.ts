@@ -26,6 +26,12 @@ const BASE_FEES: Record<string, number> = {
   'al': 6000,
 }
 
+const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
+  '6-9': 250,   // Rs. 250 per student
+  'ol': 500,    // Rs. 500 per student
+  'al': 1000,   // Rs. 1000 per student
+}
+
 const DISTANCE_CONSTANT_KM = 8
 const DISTANCE_CHARGE_PER_KM = 30 // Rs per km per session
 const FREQUENCY_SURCHARGE_PERCENT = 0.1 // 10% per extra session
@@ -50,10 +56,11 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const monthlySessionCount = frequency * SESSIONS_PER_MONTH
 
   if (method === 'physical') {
-    // Distance charge: 15 Rs/km per session (shared among all students)
-    distanceSurcharge = totalDistance * 15 * monthlySessionCount
-    // Fuel charge: 15 Rs/km per session × number of students
-    fuelCharge = totalDistance * 15 * monthlySessionCount * students
+    // Distance charge: 30 Rs/km per session (shared base transportation cost)
+    distanceSurcharge = totalDistance * 30 * monthlySessionCount
+    // Fuel charge: Fixed amount per student based on grade level
+    const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
+    fuelCharge = studentMultiplierRate * students
   }
 
   // Frequency surcharge (+10% per extra session beyond 1x/week)
