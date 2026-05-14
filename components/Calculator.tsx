@@ -20,10 +20,16 @@ export default function Calculator() {
     method: 'physical',
     frequency: 1,
     students: 1,
-    hours: undefined, // Will use default based on grade
+    hours: 2, // Default for O/L is 2 hours
   })
 
   const breakdown = calculateFees(inputs)
+
+  // Update hours when grade changes
+  const handleGradeChange = (grade: string) => {
+    const defaultHours = grade === 'al' ? 3 : 2
+    setInputs({ ...inputs, grade, hours: defaultHours })
+  }
 
   const steps = [
     { id: 'grade', label: t('steps.grade') },
@@ -121,7 +127,12 @@ export default function Calculator() {
           className="card"
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-6">{steps[currentStep].label}</h2>
-          <StepForm step={currentStep} inputs={inputs} setInputs={setInputs} />
+          <StepForm 
+            step={currentStep} 
+            inputs={inputs} 
+            setInputs={setInputs}
+            onGradeChange={handleGradeChange}
+          />
 
           <div className="flex gap-4 mt-8">
             {currentStep > 0 && (
@@ -156,7 +167,12 @@ export default function Calculator() {
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-800">{t('buttons.adjust')}: {steps[currentStep].label}</h2>
           </div>
-          <StepForm step={currentStep} inputs={inputs} setInputs={setInputs} />
+          <StepForm 
+            step={currentStep} 
+            inputs={inputs} 
+            setInputs={setInputs}
+            onGradeChange={handleGradeChange}
+          />
 
           <div className="flex gap-4 mt-8">
             <motion.button
@@ -197,7 +213,8 @@ export default function Calculator() {
                 { label: t('labels.location'), value: `${inputs.distance + 8}km`, step: 1 },
                 { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 2 },
                 { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 3 },
-                { label: t('labels.students'), value: `${inputs.students}`, step: 4 },
+                { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 4 },
+                { label: t('labels.students'), value: `${inputs.students}`, step: 5 },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}

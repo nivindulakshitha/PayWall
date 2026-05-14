@@ -9,13 +9,18 @@ interface StepFormProps {
   step: number
   inputs: FeeCalculationInputs
   setInputs: (inputs: FeeCalculationInputs) => void
+  onGradeChange?: (grade: string) => void
 }
 
-export default function StepForm({ step, inputs, setInputs }: StepFormProps) {
+export default function StepForm({ step, inputs, setInputs, onGradeChange }: StepFormProps) {
   const { t } = useLanguage()
 
   const handleChange = (key: keyof FeeCalculationInputs, value: any) => {
     setInputs({ ...inputs, [key]: value })
+    // If grade changes, notify parent
+    if (key === 'grade' && onGradeChange) {
+      onGradeChange(value)
+    }
   }
 
   const renderStep = () => {
