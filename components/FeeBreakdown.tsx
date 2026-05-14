@@ -15,6 +15,7 @@ export default function FeeBreakdownCard({ breakdown }: FeeBreakdownProps) {
   const items = [
     { label: t('results.baseFee'), value: breakdown.baseFee },
     { label: t('results.distanceSurcharge'), value: breakdown.distanceSurcharge },
+    { label: t('results.fuelCharge') + ` (${breakdown.studentMultiplier}x)`, value: breakdown.fuelCharge },
     { label: t('results.frequencySurcharge'), value: breakdown.frequencySurcharge },
   ]
 

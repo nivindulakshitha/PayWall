@@ -10,12 +10,14 @@ export interface FeeCalculationInputs {
 
 export interface FeeBreakdown {
   baseFee: number
-  distanceSurcharge: number
+  distanceSurcharge: number // Base distance charge (shared)
+  fuelCharge: number // Fuel charge based on students
   frequencySurcharge: number
   groupDiscount: number
-  fuelCharge: number
   monthlyFee: number
   sessionFee: number
+  studentMultiplier?: number // For display: number of students
+  distanceKm?: number // For display: total distance
 }
 
 const BASE_FEES: Record<string, number> = {
@@ -41,14 +43,17 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   // Base fee
   const baseFee = BASE_FEES[grade] || BASE_FEES['6-9']
 
-  // Distance & Fuel charge (only for physical, add 8km constant)
-  // Rs. 30/km per session (shared among all students - group discount applies)
+  // Distance & Fuel charges separated (only for physical, add 8km constant)
   let distanceSurcharge = 0
+  let fuelCharge = 0
+  const totalDistance = distance + DISTANCE_CONSTANT_KM
+  const monthlySessionCount = frequency * SESSIONS_PER_MONTH
+
   if (method === 'physical') {
-    const totalDistance = distance + DISTANCE_CONSTANT_KM
-    const monthlySessionCount = frequency * SESSIONS_PER_MONTH
-    // Single charge for transportation: 30 Rs/km per session (shared cost)
-    distanceSurcharge = totalDistance * 30 * monthlySessionCount
+    // Distance charge: 15 Rs/km per session (shared among all students)
+    distanceSurcharge = totalDistance * 15 * monthlySessionCount
+    // Fuel charge: 15 Rs/km per session × number of students
+    fuelCharge = totalDistance * 15 * monthlySessionCount * students
   }
 
   // Frequency surcharge (+10% per extra session beyond 1x/week)
@@ -59,7 +64,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   }
 
   // Subtotal before discount
-  const subtotalBeforeDiscount = baseFee + distanceSurcharge + frequencySurcharge
+  const subtotalBeforeDiscount = baseFee + distanceSurcharge + fuelCharge + frequencySurcharge
 
   // Group discount (-5% for 2, -10% for 3+)
   const discountRate = students >= 3 ? 0.10 : students === 2 ? 0.05 : 0
@@ -79,17 +84,18 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   }
 
   // Session fee
-  const monthlySessionCount = frequency * SESSIONS_PER_MONTH
   const sessionFee = Math.ceil(monthlyFee / monthlySessionCount / 50) * 50 // Round to nearest 50
 
   return {
     baseFee,
     distanceSurcharge,
+    fuelCharge,
     frequencySurcharge,
     groupDiscount,
-    fuelCharge: 0, // Combined with distance surcharge, don't show separately
     monthlyFee,
     sessionFee,
+    studentMultiplier: students,
+    distanceKm: totalDistance,
   }
 }
 
@@ -128,7 +134,8 @@ export function generateWhatsAppMessage(
 
 *📊 Fee Breakdown:*
 • Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
-• Distance Surcharge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
+• Distance Charge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
+• Fuel Charge (${breakdown.studentMultiplier}x students): Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
 • Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
 ${breakdown.groupDiscount > 0 ? `• Group Discount: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')}\n` : ''}
 *Contact: 0787124080*`
