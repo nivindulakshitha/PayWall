@@ -56,8 +56,8 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const monthlySessionCount = frequency * SESSIONS_PER_MONTH
 
   if (method === 'physical') {
-    // Distance charge: 30 Rs/km per session (shared base transportation cost)
-    distanceSurcharge = totalDistance * 30 * monthlySessionCount
+    // Distance charge: Monthly fixed charge = (distance + 8km) × 30 Rs/km
+    distanceSurcharge = totalDistance * 30
     // Fuel charge: Distance × 30 Rs/km × number of students (per student fuel cost)
     fuelCharge = totalDistance * 30 * students
   }
