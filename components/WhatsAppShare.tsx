@@ -50,7 +50,7 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       const link = `${window.location.origin}${window.location.pathname}?${params.toString()}`
       
       const linkText = t('messages.linkText') || '[ View & Edit Calculation ]\n'
-      message += `\n\n${linkText}${link}`
+      message += `${linkText}${link}`
     }
 
     const encodedMessage = encodeURIComponent(message)
