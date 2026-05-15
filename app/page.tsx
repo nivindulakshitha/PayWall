@@ -70,22 +70,21 @@ export default function Home() {
 
           {/* Top bar: Logo + Language */}
           <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-2.5">
-              <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden ring-1 ring-white/10 flex-shrink-0">
+            <div className="flex flex-col items-start">
+              <div className="relative w-16 h-8 flex-shrink-0">
                 <Image
                   src="/ICTA+.png"
                   alt="ICTA+"
                   fill
-                  className="object-contain bg-white/5 p-1"
+                  className="object-contain"
                   priority
                 />
               </div>
-              <div>
-                <p className="text-xs font-semibold text-indigo-400 tracking-wider uppercase">ICTA+</p>
-                <p className="text-[10px] text-gray-500">by Nivindu Lakshitha</p>
-              </div>
+              <p className="text-[10px] text-gray-500 font-medium tracking-wide">by Nivindu Lakshitha</p>
             </div>
-            <LanguageToggle />
+            <div className="pt-1">
+              <LanguageToggle />
+            </div>
           </div>
 
         </header>

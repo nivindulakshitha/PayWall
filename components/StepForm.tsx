@@ -133,7 +133,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleChange('method', option.value)}
-                  className={`option-card text-center py-6 ${
+                  className={`option-card text-center py-6 flex flex-col items-center justify-center min-h-[140px] ${
                     inputs.method === option.value ? 'option-card-active' : ''
                   }`}
                 >
@@ -160,11 +160,11 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleChange('frequency', freq)}
-                  className={`option-card text-center py-5 ${
+                  className={`option-card text-center py-5 flex flex-col items-center justify-center min-h-[120px] ${
                     inputs.frequency === freq ? 'option-card-active' : ''
                   }`}
                 >
-                  <p className={`text-2xl font-bold mb-1 ${inputs.frequency === freq ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
+                  <p className={`text-3xl font-black mb-1 ${inputs.frequency === freq ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
                     {freq}x
                   </p>
                   <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">/ week</p>

@@ -219,7 +219,7 @@ body::after {
   }
 
   .option-card {
-    @apply rounded-xl p-4 transition-all duration-300 cursor-pointer min-h-[120px] flex flex-col items-center justify-center;
+    @apply rounded-xl p-4 transition-all duration-300 cursor-pointer;
     background: rgba(255, 255, 255, 0.03);
     border: 1.5px solid rgba(255, 255, 255, 0.06);
   }
