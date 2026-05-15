@@ -10,6 +10,7 @@ export const translations = {
     language: "English",
     steps: {
       grade: "Select Grade",
+      examYear: "Examination Year",
       location: "Location Details",
       payment: "Payment Info",
       method: "Class Method",
@@ -20,6 +21,7 @@ export const translations = {
     },
     labels: {
       grade: "Grade Level",
+      examYear: "Exam Year",
       location: "Total distance (km)",
       method: "Class Method",
       frequency: "Sessions per Week",
@@ -89,6 +91,7 @@ export const translations = {
     },
     messages: {
       selectGrade: "Please select your grade level",
+      selectYear: "Select your examination year",
       enterDistance: "Enter distance from Wariyapola",
       selectMethod: "Choose online or physical classes",
       selectFrequency: "Select session frequency",
@@ -119,6 +122,7 @@ export const translations = {
     language: "සිංහල",
     steps: {
       grade: "ශ්‍රේණිය තෝරන්න",
+      examYear: "විභාග වර්ෂය",
       location: "ස්ථානය",
       payment: "ගෙවීම් තොරතුරු",
       notApplicable: "අදාළ නොවේ",
@@ -130,6 +134,7 @@ export const translations = {
     },
     labels: {
       grade: "ශ්‍රේණිය",
+      examYear: "විභාග වර්ෂය",
       location: "මුළු දුර ප්‍රමාණය (කි.මී.)",
       method: "පන්ති පවත්වන ආකාරය",
       frequency: "සතියට දින ගණන",
@@ -199,6 +204,7 @@ export const translations = {
     },
     messages: {
       selectGrade: "කරුණාකර ඔබගේ ශ්‍රේණිය තෝරන්න",
+      selectYear: "ඔබගේ විභාග වර්ෂය තෝරන්න",
       enterDistance: "වාරියපොල නගරයේ සිට ඔබගේ නිවසට ඇති දුර ඇතුළත් කරන්න",
       selectMethod: "අන්තර්ජාලය හරහා හෝ නිවසට පැමිණ පන්ති තෝරන්න",
       selectFrequency: "සතියට පවත්වන දින ගණන තෝරන්න",

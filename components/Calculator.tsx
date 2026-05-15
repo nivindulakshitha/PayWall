@@ -21,6 +21,7 @@ export default function Calculator() {
     frequency: 1,
     students: 1,
     hours: 2, // Default for O/L is 2 hours
+    examYear: 2026,
   })
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function Calculator() {
           frequency: parseInt(params.get('f') || '1', 10),
           hours: parseInt(params.get('h') || '2', 10),
           students: parseInt(params.get('s') || '1', 10),
+          examYear: parseInt(params.get('y') || '2026', 10),
         })
         setShowResults(true)
       }
@@ -50,6 +52,7 @@ export default function Calculator() {
 
   const steps = [
     { id: 'grade', label: t('steps.grade'), icon: '01' },
+    { id: 'examYear', label: t('steps.examYear'), icon: 'Y' },
     { id: 'method', label: t('steps.method'), icon: '02' },
     { id: 'location', label: inputs.method === 'online' ? t('steps.payment') : t('steps.location'), icon: '03' },
     { id: 'frequency', label: t('steps.frequency'), icon: '04' },
@@ -59,7 +62,12 @@ export default function Calculator() {
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1)
+      // Skip examYear for grade 6-9
+      if (currentStep === 0 && inputs.grade === '6-9') {
+        setCurrentStep(2)
+      } else {
+        setCurrentStep(currentStep + 1)
+      }
     } else {
       setShowResults(true)
       setEditMode(false)
@@ -68,7 +76,12 @@ export default function Calculator() {
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1)
+      // Skip examYear for grade 6-9
+      if (currentStep === 2 && inputs.grade === '6-9') {
+        setCurrentStep(0)
+      } else {
+        setCurrentStep(currentStep - 1)
+      }
     }
   }
 
@@ -276,16 +289,17 @@ export default function Calculator() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                 {[
                   { label: t('labels.grade'), value: inputs.grade === 'al' ? 'A/L' : inputs.grade === 'ol' ? 'O/L' : '6-9', step: 0, color: 'indigo' },
-                  { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 1, color: 'cyan' },
+                  ...(inputs.grade !== '6-9' ? [{ label: t('labels.examYear'), value: `${inputs.examYear}`, step: 1, color: 'orange' }] : []),
+                  { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 2, color: 'cyan' },
                   { 
                     label: t('labels.location'), 
                     value: inputs.method === 'online' ? t('labels.notApplicable') : `${inputs.distance + 7}km`, 
-                    step: 2, 
+                    step: 3, 
                     color: 'blue' 
                   },
-                  { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 3, color: 'violet' },
-                  { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 4, color: 'purple' },
-                  { label: t('labels.students'), value: `${inputs.students}`, step: 5, color: 'fuchsia' },
+                  { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 4, color: 'violet' },
+                  { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 5, color: 'purple' },
+                  { label: t('labels.students'), value: `${inputs.students}`, step: 6, color: 'fuchsia' },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}

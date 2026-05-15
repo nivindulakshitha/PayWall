@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FeeCalculationInputs } from '@/lib/calculations'
+import { FeeCalculationInputs, EXAM_YEARS } from '@/lib/calculations'
 import { useLanguage } from '@/lib/i18n'
 
 interface StepFormProps {
@@ -74,7 +74,50 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           </motion.div>
         )
 
-      case 1: // Method
+
+
+      case 1: // Exam Year
+        return (
+          <motion.div variants={itemVariants} className="space-y-4">
+            <p className="text-sm text-gray-400">{t('messages.selectYear')}</p>
+            <div className="grid grid-cols-1 gap-2.5">
+              {EXAM_YEARS.map((year) => (
+                <motion.button
+                  key={year}
+                  whileHover={{ scale: 1.01, y: -1 }}
+                  whileTap={{ scale: 0.99 }}
+                  onClick={() => handleChange('examYear', year)}
+                  className={`option-card text-left ${
+                    inputs.examYear === year ? 'option-card-active' : ''
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className={`font-semibold text-sm ${inputs.examYear === year ? 'text-indigo-300' : 'text-gray-200'}`}>
+                        {year}
+                      </p>
+                    </div>
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                      inputs.examYear === year
+                        ? 'border-indigo-400 bg-indigo-500'
+                        : 'border-gray-600'
+                    }`}>
+                      {inputs.examYear === year && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="w-2 h-2 rounded-full bg-white"
+                        />
+                      )}
+                    </div>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )
+
+      case 2: // Method
         return (
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectMethod')}</p>
@@ -120,7 +163,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           </motion.div>
         )
 
-      case 2: // Location/Distance OR Bank Details
+      case 3: // Location/Distance OR Bank Details
         if (inputs.method === 'online') {
           return (
             <motion.div variants={itemVariants} className="space-y-4">
@@ -188,7 +231,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           </motion.div>
         )
 
-      case 3: // Frequency
+      case 4: // Frequency
         return (
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectFrequency')}</p>
@@ -213,7 +256,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           </motion.div>
         )
 
-      case 4: // Hours/Duration
+      case 5: // Hours/Duration
         return (
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectHours')}</p>
@@ -258,7 +301,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           </motion.div>
         )
 
-      case 5: // Students
+      case 6: // Students
         return (
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectStudents')}</p>
