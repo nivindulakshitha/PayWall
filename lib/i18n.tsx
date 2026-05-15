@@ -1,7 +1,7 @@
-// lib/i18n.ts
+// lib/i18n.tsx
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { translations, Language } from './translations'
 
 interface I18nContextType {
@@ -14,6 +14,15 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined)
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('si') // Default: Sinhala
+
+  // Set data-lang on <html> on mount and on every change
+  useEffect(() => {
+    document.documentElement.setAttribute('data-lang', language)
+  }, [language])
+
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang)
+  }
 
   const t = (key: string): string => {
     const keys = key.split('.')
@@ -31,7 +40,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
+    <I18nContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
       {children}
     </I18nContext.Provider>
   )

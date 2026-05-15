@@ -36,8 +36,15 @@ const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
   'al': 750,   // Rs. 750 per student
 }
 
-const DISTANCE_CONSTANT_KM = 8
-const FUEL_CHARGE_PER_KM = 10 // Rs per km (will be multiplied by 2 for round trip)
+const DISTANCE_CONSTANT_KM = 7
+
+// Fuel cost calculation
+const FUEL_PRICE_PER_LITRE = 410   // Rs. per litre
+const KM_PER_LITRE = 50            // km per litre
+const RAW_COST_PER_KM = FUEL_PRICE_PER_LITRE / KM_PER_LITRE  // = 8.2 Rs/km
+// Round UP to next multiple of 5
+export const FUEL_CHARGE_PER_KM = Math.ceil(RAW_COST_PER_KM / 5) * 5  // = 10 Rs/km
+
 const FUEL_ROUND_TRIP_MULTIPLIER = 2 // For come and go
 const FREQUENCY_SURCHARGE_PERCENT = 0.1 // 10% per extra session
 const EXTRA_HOURS_SURCHARGE_PERCENT = 0.1 // 10% per extra hour
@@ -46,11 +53,7 @@ const DEFAULT_HOURS: Record<string, number> = {
   'ol': 2,    // 2 hours
   'al': 3,    // 3 hours
 }
-const GROUP_DISCOUNTS: Record<number, number> = {
-  1: 0,
-  2: 0.05, // -5% for 2 students
-  3: 0.10, // -10% for 3+
-}
+
 
 export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const { grade, distance, method, frequency, students, hours } = inputs
@@ -75,7 +78,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const totalDistance = distance + DISTANCE_CONSTANT_KM
 
   if (method === 'physical') {
-    // Fuel charge: (distance + 8km) × 2 (round trip) × Rs. 10/km × frequency × 4 weeks
+    // Fuel charge: totalDistance × 2 (round trip) × Rs.FUEL_CHARGE_PER_KM/km × frequency × 4 weeks
     const roundTripDistance = totalDistance * FUEL_ROUND_TRIP_MULTIPLIER
     distanceSurcharge = roundTripDistance * FUEL_CHARGE_PER_KM * frequency * 4
     // Student charge: Grade-based multiplier × number of students
@@ -167,5 +170,5 @@ Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
 - Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
 ${breakdown.hoursSurcharge > 0 ? `- Extra Hours Surcharge: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
 *Contact: 0787124080*
-_Share this message with your friends_`
+_Share this message with your class mates!_`
 }

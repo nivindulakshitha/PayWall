@@ -111,7 +111,7 @@ export const translations = {
       distanceSurcharge: "දුර ප්‍රමාණය සහ ප්‍රවාහන අයකිරීම",
       frequencySurcharge: "අමතර දින සඳහා අයකිරීම",
       groupDiscount: "කණ්ඩායම් වට්ටම",
-      fuelCharge: "ප්‍රවාහන ගාස්තුව",
+      fuelCharge: "ඉන්ධන ගාස්තුව",
       total: "මුළු මුදල",
       summary: "ඔබගේ තෝරාගැනීම්"
     },
