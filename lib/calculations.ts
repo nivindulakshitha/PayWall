@@ -18,6 +18,7 @@ export interface FeeBreakdown {
   groupDiscount: number
   monthlyFee: number
   perStudentFee: number
+  adjustment: number
   studentMultiplier?: number // For display: number of students
   distanceKm?: number // For display: total distance
   hours?: number // For display: class hours
@@ -107,14 +108,21 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     groupDiscount = subtotalBeforeDiscount * discountRate
   }
 
-  // Monthly fee
-  let monthlyFee = subtotalBeforeDiscount - groupDiscount
+  // 1. Initial Monthly fee
+  const rawMonthlyFee = subtotalBeforeDiscount - groupDiscount
 
-  // Round monthly fee to nearest 500
-  monthlyFee = roundToNearest500(monthlyFee)
+  // 2. Calculate exact per-student fee
+  const perStudentExact = rawMonthlyFee / students
 
-  // Per-student monthly fee
-  const perStudentFee = Math.ceil(monthlyFee / students)
+  // 3. Round per-student fee to nearest 100
+  // 2834 -> 2800, 2890 -> 2900, 2850 -> 2900
+  const perStudentFee = Math.round(perStudentExact / 100) * 100
+
+  // 4. Final adjusted monthly fee
+  const monthlyFee = perStudentFee * students
+
+  // 5. Rounding adjustment for breakdown
+  const adjustment = monthlyFee - rawMonthlyFee
 
   return {
     baseFee,
@@ -125,6 +133,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     groupDiscount,
     monthlyFee,
     perStudentFee,
+    adjustment,
     studentMultiplier: students,
     distanceKm: totalDistance,
     hours: classHours,

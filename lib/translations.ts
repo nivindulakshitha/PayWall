@@ -63,8 +63,15 @@ export const translations = {
       fuelCharge: "Fuel Charge",
       hoursSurcharge: "Extra Hours Surcharge",
       total: "Total Amount",
+      adjustment: "Rounding Adjustment",
       summary: "Your Selections",
-      paymentDeadline: "Fee payment should be done by the last class day of each month."
+      paymentDeadline: "Fee payment should be done by the last class day of each month.",
+      baseFeeDesc: "Base monthly fee",
+      frequencyDesc: "10% per extra session",
+      adjustmentDesc: "Round per student to nearest 100",
+      noDiscount: "No discount (1 student)",
+      discount2: "5% for 2 students",
+      discount3: "10% for 3+ students",
     },
     messages: {
       selectGrade: "Please select your grade level",
@@ -152,8 +159,15 @@ export const translations = {
       hoursSurcharge: "අමතර පැය සඳහා අයකිරීම",
       studentCharge: "සිසුන් සඳහා අයකිරීම",
       total: "මුළු මුදල",
+      adjustment: "වටයන ලද ගැලපුම",
       summary: "ඔබගේ තෝරාගැනීම්",
-      paymentDeadline: "ගාස්තු ගෙවීම් සෑම මසකම අවසාන පන්ති දිනයේදී සිදු කිරීමට කාරුණික වන්න"
+      paymentDeadline: "ගාස්තු ගෙවීම් සෑම මසකම අවසාන පන්ති දිනයේදී සිදු කිරීමට කාරුණික වන්න",
+      baseFeeDesc: "මූලික මාසික ගාස්තුව",
+      frequencyDesc: "අමතර දින සඳහා 10% බැගින්",
+      adjustmentDesc: "එක් සිසුවෙකු සඳහා ගාස්තුව ආසන්නතම 100 ට වටයන ලදී",
+      noDiscount: "වට්ටම් නොමැත",
+      discount2: "සිසුන් 2ක් සඳහා 5% වට්ටමක්",
+      discount3: "සිසුන් 3+ සඳහා 10% වට්ටමක්",
     },
     messages: {
       selectGrade: "කරුණාකර ඔබගේ ශ්‍රේණිය තෝරන්න",

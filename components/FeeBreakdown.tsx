@@ -101,7 +101,7 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
           <div className="flex items-center justify-between py-3">
             <div>
               <p className="text-sm font-medium text-gray-200">{t('results.baseFee')}</p>
-              <p className="text-[11px] text-gray-500 mt-0.5">Base monthly fee</p>
+              <p className="text-[11px] text-gray-500 mt-0.5">{t('results.baseFeeDesc')}</p>
             </div>
             <p className="text-sm font-semibold text-gray-200 tabular-nums">{formatCurrency(breakdown.baseFee)}</p>
           </div>
@@ -135,7 +135,7 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
             <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.frequencySurcharge')}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">10% per extra session</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">{t('results.frequencyDesc')}</p>
               </div>
               <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.frequencySurcharge)}</p>
             </div>
@@ -157,13 +157,29 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
             <div>
               <p className="text-sm font-medium text-gray-200">{t('results.groupDiscount')}</p>
               <p className="text-[11px] text-gray-500 mt-0.5">
-                {breakdown.studentMultiplier && breakdown.studentMultiplier >= 3 ? '10% for 3+ students' : breakdown.studentMultiplier === 2 ? '5% for 2 students' : 'No discount (1 student)'}
+                {breakdown.studentMultiplier && breakdown.studentMultiplier >= 3 
+                  ? t('results.discount3') 
+                  : breakdown.studentMultiplier === 2 
+                    ? t('results.discount2') 
+                    : t('results.noDiscount')}
               </p>
             </div>
             <p className={`text-sm font-semibold tabular-nums ${breakdown.groupDiscount > 0 ? 'text-emerald-400' : 'text-gray-600'}`}>
               {breakdown.groupDiscount > 0 ? `- ${formatCurrency(breakdown.groupDiscount)}` : 'Rs. 0'}
             </p>
           </div>
+          {/* Rounding Adjustment */}
+          {breakdown.adjustment !== 0 && (
+            <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+              <div>
+                <p className="text-sm font-medium text-gray-200">{t('results.adjustment')}</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">{t('results.adjustmentDesc')}</p>
+              </div>
+              <p className={`text-sm font-semibold tabular-nums ${breakdown.adjustment > 0 ? 'text-amber-400' : 'text-emerald-400'}`}>
+                {breakdown.adjustment > 0 ? `+ ${formatCurrency(breakdown.adjustment)}` : `- ${formatCurrency(Math.abs(breakdown.adjustment))}`}
+              </p>
+            </div>
+          )}
 
           {/* Total */}
           <div className="flex items-center justify-between pt-4 mt-2" style={{ borderTop: '2px solid rgba(255,255,255,0.08)' }}>
