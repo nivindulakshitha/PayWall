@@ -9,13 +9,18 @@ interface StepFormProps {
   step: number
   inputs: FeeCalculationInputs
   setInputs: (inputs: FeeCalculationInputs) => void
+  onGradeChange?: (grade: string) => void
 }
 
-export default function StepForm({ step, inputs, setInputs }: StepFormProps) {
+export default function StepForm({ step, inputs, setInputs, onGradeChange }: StepFormProps) {
   const { t } = useLanguage()
 
   const handleChange = (key: keyof FeeCalculationInputs, value: any) => {
     setInputs({ ...inputs, [key]: value })
+    // If grade changes, notify parent
+    if (key === 'grade' && onGradeChange) {
+      onGradeChange(value)
+    }
   }
 
   const renderStep = () => {
@@ -129,7 +134,44 @@ export default function StepForm({ step, inputs, setInputs }: StepFormProps) {
           </motion.div>
         )
 
-      case 4: // Students
+      case 4: // Hours/Duration
+        return (
+          <motion.div variants={itemVariants} className="space-y-4">
+            <p className="text-gray-600 mb-4">{t('messages.selectHours')}</p>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                {t('labels.hours')}
+              </label>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => handleChange('hours', Math.max(1, (inputs.hours || 2) - 1))}
+                  className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-bold"
+                >
+                  −
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  value={inputs.hours || 2}
+                  onChange={(e) => handleChange('hours', parseInt(e.target.value) || 2)}
+                  className="input-field text-center flex-1 text-lg font-bold"
+                />
+                <button
+                  onClick={() => handleChange('hours', Math.min(5, (inputs.hours || 2) + 1))}
+                  className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-bold"
+                >
+                  +
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-2">
+                💡 Default: 6-9 & O/L: 2hrs, A/L: 3hrs
+              </p>
+            </div>
+          </motion.div>
+        )
+
+      case 5: // Students
         return (
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-gray-600 mb-4">{t('messages.selectStudents')}</p>
@@ -147,23 +189,18 @@ export default function StepForm({ step, inputs, setInputs }: StepFormProps) {
                 <input
                   type="number"
                   min="1"
-                  max="10"
+                  max="100"
                   value={inputs.students}
                   onChange={(e) => handleChange('students', parseInt(e.target.value) || 1)}
                   className="input-field text-center flex-1 text-lg font-bold"
                 />
                 <button
-                  onClick={() => handleChange('students', Math.min(10, inputs.students + 1))}
+                  onClick={() => handleChange('students', inputs.students + 1)}
                   className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 font-bold"
                 >
                   +
                 </button>
               </div>
-              {inputs.students >= 2 && (
-                <p className="text-sm text-green-600 font-semibold mt-3">
-                  ✓ {inputs.students === 2 ? '5% discount' : '10% discount'} {t('results.groupDiscount')}
-                </p>
-              )}
             </div>
           </motion.div>
         )

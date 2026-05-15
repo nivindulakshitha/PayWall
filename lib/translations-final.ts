@@ -68,64 +68,64 @@ export const translations = {
   },
   si: {
     title: "පන්ති ගාස්තු ගණකය",
-    subtitle: "ඔබේ පුද්ගලික අධ්‍යාපන පන්ති ගාස්තු පහසුවෙන් ගණනය කරන්න",
+    subtitle: "ඔබගේ උපකාරක පන්ති ගාස්තු පහසුවෙන් ගණනය කරගන්න",
     language: "සිංහල",
     steps: {
       grade: "ශ්‍රේණිය තෝරන්න",
-      location: "පිහිටීම් විස්තර",
-      method: "පන්ති ස්වරූපය",
-      frequency: "සතිපතින සැසි",
-      students: "ශිෂ්‍ය සංඛ්‍යාව",
-      summary: "ගාස්තු සාරාංශ"
+      location: "ස්ථානය පිළිබඳ විස්තර",
+      method: "පන්ති පවත්වන ආකාරය",
+      frequency: "සතියට දින ගණන",
+      students: "සිසුන් ගණන",
+      summary: "ගාස්තු සාරාංශය"
     },
     labels: {
       grade: "ශ්‍රේණිය",
-      location: "වාරියපොල සිට ඔබේ නිවසට දුර (කි.මී.)",
-      method: "පන්ති ස්වරූපය",
-      frequency: "සතිපතින සැසි",
-      students: "ශිෂ්‍ය සංඛ්‍යාව",
-      payingFrequency: "ගාස්තු ගෙවීමේ ස්වරූපය"
+      location: "වාරියපොල නගරයේ සිට දුර (කි.මී.)",
+      method: "පන්ති පවත්වන ආකාරය",
+      frequency: "සතියට දින ගණන",
+      students: "සිසුන් ගණන",
+      payingFrequency: "ගාස්තු ගෙවන ආකාරය"
     },
     grades: {
-      "6-9": "ශ්‍රේණිය 6-9 (රු. 2,500)",
-      "ol": "ඔ/ල් ශ්‍රේණිය 10-11 (රු. 3,500)",
-      "al": "ඇ/ල් ශ්‍රේණිය 12-13 (රු. 5,000)"
+      "6-9": "6-9 ශ්‍රේණි (රු. 2,500)",
+      "ol": "සාමාන්‍ය පෙළ 10-11 ශ්‍රේණි (රු. 3,500)",
+      "al": "උසස් පෙළ 12-13 ශ්‍රේණි (රු. 5,000)"
     },
     methods: {
-      online: "අන්තර්ජාලය",
-      physical: "සිටින්න (පුද්ගල)"
+      online: "අන්තර්ජාලය හරහා (Online)",
+      physical: "නිවසට පැමිණ (Physical)"
     },
     buttons: {
-      calculate: "ගාස්තු ගණනය කරන්න",
-      shareWhatsApp: "WhatsApp එකින් බෙදා ගන්න",
-      reset: "නැවත ආරම්භ කරන්න",
-      next: "ඊළඟ",
+      calculate: "ගාස්තුව ගණනය කරන්න",
+      shareWhatsApp: "WhatsApp හරහා යවන්න",
+      reset: "නැවත මුල සිට",
+      next: "ඉදිරියට",
       back: "ආපසු",
       toggleLanguage: "English"
     },
     results: {
       monthlyFee: "මාසික ගාස්තුව",
-      sessionFee: "එක් සැසියට ගාස්තුව",
-      breakdown: "ගාස්තු විස්තර",
-      baseFee: "මූල ගාස්තුව",
-      distanceSurcharge: "දුරස්ථ එබং ඉන්ධන ශුල්කය",
-      frequencySurcharge: "අතිරේක සැසි ශුල්කය",
-      groupDiscount: "සමූහ වට්ටමිනුව",
-      fuelCharge: "ඉන්ධන ශුල්කය",
-      total: "සම්පූර්ණ ගාස්තුව",
-      summary: "ඔබේ තෝරාගැනීම"
+      sessionFee: "එක් දිනක් සඳහා ගාස්තුව",
+      breakdown: "ගාස්තු විස්තරය",
+      baseFee: "මූලික ගාස්තුව",
+      distanceSurcharge: "දුර ප්‍රමාණය සහ ප්‍රවාහන අයකිරීම",
+      frequencySurcharge: "අමතර දින සඳහා අයකිරීම",
+      groupDiscount: "කණ්ඩායම් වට්ටම",
+      fuelCharge: "ප්‍රවාහන ගාස්තුව",
+      total: "මුළු මුදල",
+      summary: "ඔබගේ තෝරාගැනීම්"
     },
     messages: {
-      selectGrade: "කරුණාකර ඔබේ ශ්‍රේණිය තෝරන්න",
-      enterDistance: "වාරියපොල සිට ඔබේ නිවසට දුර ඇතුළු කරන්න",
-      selectMethod: "අන්තර්ජාලය හෝ සිටින්න පන්තිය තෝරන්න",
-      selectFrequency: "සතිපතින සැසි සංඛ්‍යාව තෝරන්න",
-      selectStudents: "ශිෂ්‍ය සංඛ්‍යාව තෝරන්න"
+      selectGrade: "කරුණාකර ඔබගේ ශ්‍රේණිය තෝරන්න",
+      enterDistance: "වාරියපොල නගරයේ සිට ඔබගේ නිවසට ඇති දුර ඇතුළත් කරන්න",
+      selectMethod: "අන්තර්ජාලය හරහා හෝ නිවසට පැමිණ පන්ති තෝරන්න",
+      selectFrequency: "සතියට පවත්වන දින ගණන තෝරන්න",
+      selectStudents: "සිසුන් ගණන තෝරන්න"
     },
     payingFrequencies: {
       monthly: "මාසිකව",
-      perSession: "සැසිකට"
+      perSession: "දිනකට"
     },
-    whatsappMessage: "පන්ති ගාස්තු ගණකය\n\nශ්‍රේණිය: {grade}\nපන්ති ස්වරූපය: {method}\nදුර: {distance}කි.මී.\nසෙසු සැසි: {frequency}සතිය\nශිෂ්‍ය සංඛ්‍යාව: {students}\n\nමාසික ගාස්තුව: රු. {monthlyFee}\nසැසියට: රු. {sessionFee}\n\nසම්බන්ධතා: 0787124080"
+    whatsappMessage: "පන්ති ගාස්තු ගණකය\n\nශ්‍රේණිය: {grade}\nපන්ති ක්‍රමය: {method}\nදුර: {distance}කි.මී.\nදින ගණන: {frequency} වරක්/සතියට\nසිසුන් ගණන: {students}\n\nමාසික ගාස්තුව: රු. {monthlyFee}\nඑක් දිනකට: රු. {sessionFee}\n\nඅමතන්න: 0787124080"
   }
 }
