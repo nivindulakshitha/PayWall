@@ -182,18 +182,23 @@ ${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km
 - ${t('results.duration')}: ${breakdown.hours}hrs
 - ${t('results.students')}: ${studentLabel}
 
-*${t('results.feeSummary')}*
-${t('results.monthlyFee')}: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
-${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
-
 *${t('results.feeBreakdown')}*
 - ${t('results.baseFee')}: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
 ${breakdown.fuelCharge > 0 ? `- ${t('results.fuelCharge')}: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}\n` : ''}- ${t('results.studentCharge')} (${inputs.students}x): Rs. ${breakdown.studentCharge.toLocaleString('en-LK')}
 - ${t('results.frequencySurcharge')}: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
-${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Rs. ${breakdown.perStudentAdjustment.toFixed(0)} x ${inputs.students})\n` : ''}
-${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
-*${t('results.contact')}: 0787124080*
-_${t('results.politeNote')}_
-${inputs.method === 'online' ? `\n*${t('results.bankDetails')}*\n${t('bank.bank')}\n${t('bank.branch')}\n${t('bank.account')}\n${t('bank.holder')}\n` : ''}
-_${t('results.shareNote')}_`
+${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Rs. ${breakdown.perStudentAdjustment.toFixed(0)} x ${inputs.students})` : ''}
+${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}` : ''}
+
+*${t('results.accordingly')}*
+${t('results.monthlyFee')}: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
+${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
+
+» *${t('results.contact')}: 0787124080*
+
+» _${t('results.politeNote')}_
+
+» _${t('results.paymentDeadline')}_
+${inputs.method === 'online' ? `\n» *${t('results.bankDetails')}*\n${t('bank.bank')}\n${t('bank.branch')}\n${t('bank.account')}\n${t('bank.holder')}\n` : ''}
+
+> _${t('results.shareNote')}_`
 }
