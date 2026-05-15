@@ -167,5 +167,5 @@ Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
 - Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
 ${breakdown.hoursSurcharge > 0 ? `- Extra Hours Surcharge: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
 *Contact: 0787124080*
-_Share this message with your friends_`
+_Share this message with your class mates!_`
 }

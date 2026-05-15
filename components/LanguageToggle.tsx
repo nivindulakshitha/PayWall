@@ -1,6 +1,7 @@
 // components/LanguageToggle.tsx
 'use client'
 
+import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/i18n'
 
 export default function LanguageToggle() {
@@ -11,12 +12,23 @@ export default function LanguageToggle() {
   }
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
       onClick={toggleLanguage}
-      className="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+      className="group flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300"
+      style={{
+        background: 'rgba(255, 255, 255, 0.04)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+      }}
       title={`Switch to ${language === 'en' ? 'Sinhala' : 'English'}`}
     >
-      {t('buttons.toggleLanguage')}
-    </button>
+      <svg className="w-4 h-4 text-gray-400 group-hover:text-indigo-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+      </svg>
+      <span className="text-gray-300 group-hover:text-white transition-colors">
+        {t('buttons.toggleLanguage')}
+      </span>
+    </motion.button>
   )
 }

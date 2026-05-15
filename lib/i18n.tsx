@@ -15,6 +15,19 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined)
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('si') // Default: Sinhala
 
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang)
+    // Toggle UN-Malithi font for Sinhala via CSS attribute selector
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-lang', lang)
+    }
+  }
+
+  // Set initial data-lang on mount
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-lang', language)
+  }
+
   const t = (key: string): string => {
     const keys = key.split('.')
     let value: any = translations[language]
@@ -31,7 +44,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
+    <I18nContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
       {children}
     </I18nContext.Provider>
   )
