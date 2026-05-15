@@ -11,6 +11,7 @@ export const translations = {
     steps: {
       grade: "Select Grade",
       location: "Location Details",
+      payment: "Payment Info",
       method: "Class Method",
       frequency: "Session Frequency",
       hours: "Class Duration",
@@ -19,12 +20,13 @@ export const translations = {
     },
     labels: {
       grade: "Grade Level",
-      location: "Distance from Wariyapola (km)",
+      location: "Total distance (km)",
       method: "Class Method",
       frequency: "Sessions per Week",
       students: "Number of Students",
       hours: "Class Duration (Hours)",
-      payingFrequency: "Paying Frequency"
+      payingFrequency: "Paying Frequency",
+      notApplicable: "N/A"
     },
     grades: {
       "6-9": "Grade 6-9 (Rs. 2,000)",
@@ -61,7 +63,8 @@ export const translations = {
       fuelCharge: "Fuel Charge",
       hoursSurcharge: "Extra Hours Surcharge",
       total: "Total Amount",
-      summary: "Your Selected Details"
+      summary: "Your Selections",
+      paymentDeadline: "Fee payment should be done by the last class day of each month."
     },
     messages: {
       selectGrade: "Please select your grade level",
@@ -78,7 +81,16 @@ export const translations = {
       monthly: "Monthly",
       perSession: "Per Session"
     },
-    whatsappMessage: "Class Fee Calculator\n\nGrade: {grade}\nMethod: {method}\nDistance: {distance}km\nFrequency: {frequency}x/week\nNumber of Students: {students}\n\nMonthly Fee: Rs. {monthlyFee}\nPer Session: Rs. {sessionFee}\n\nContact: 0787124080"
+    whatsappMessage: "Class Fee Calculator\n\nGrade: {grade}\nMethod: {method}\nDistance: {distance}km\nFrequency: {frequency}x/week\nNumber of Students: {students}\n\nMonthly Fee: Rs. {monthlyFee}\nPer Session: Rs. {sessionFee}\n\nContact: 0787124080",
+    bank: {
+      title: "Bank Details for Online Classes",
+      account: "Account Number: 0088532455",
+      bank: "Bank of Ceylon",
+      branch: "Wariyapola Branch (379)",
+      holder: "Account Holder: MR N M N L N BANDARA",
+      copy: "Click to copy details",
+      paymentNote: "Note: Please make the payment and share the receipt with your teacher."
+    }
   },
   si: {
     title: "පන්ති ගාස්තු ගණකය",
@@ -86,7 +98,9 @@ export const translations = {
     language: "සිංහල",
     steps: {
       grade: "ශ්‍රේණිය තෝරන්න",
-      location: "ස්ථානය පිළිබඳ විස්තර",
+      location: "ස්ථානය",
+      payment: "ගෙවීම් තොරතුරු",
+      notApplicable: "අදාළ නොවේ",
       method: "පන්ති පවත්වන ආකාරය",
       frequency: "සතියට දින ගණන",
       hours: "පන්තියේ කාලසීමාව",
@@ -95,12 +109,13 @@ export const translations = {
     },
     labels: {
       grade: "ශ්‍රේණිය",
-      location: "වාරියපොල නගරයේ සිට දුර (කි.මී.)",
+      location: "මුළු දුර ප්‍රමාණය (කි.මී.)",
       method: "පන්ති පවත්වන ආකාරය",
       frequency: "සතියට දින ගණන",
       hours: "පන්තියේ කාලසීමාව (පැය)",
       students: "සිසුන් ගණන",
-      payingFrequency: "ගාස්තු ගෙවන ආකාරය"
+      payingFrequency: "ගාස්තු ගෙවන ආකාරය",
+      notApplicable: "අදාළ නොවේ"
     },
     grades: {
       "6-9": "6-9 ශ්‍රේණි (රු. 2,000)",
@@ -137,7 +152,8 @@ export const translations = {
       hoursSurcharge: "අමතර පැය සඳහා අයකිරීම",
       studentCharge: "සිසුන් සඳහා අයකිරීම",
       total: "මුළු මුදල",
-      summary: "ඔබගේ තෝරාගැනීම්"
+      summary: "ඔබගේ තෝරාගැනීම්",
+      paymentDeadline: "ගාස්තු ගෙවීම් සෑම මසකම අවසාන පන්ති දිනයේදී සිදු කිරීමට කාරුණික වන්න"
     },
     messages: {
       selectGrade: "කරුණාකර ඔබගේ ශ්‍රේණිය තෝරන්න",
@@ -154,6 +170,15 @@ export const translations = {
       monthly: "මාසිකව",
       perSession: "දිනකට"
     },
-    whatsappMessage: "පන්ති ගාස්තු ගණකය\n\nශ්‍රේණිය: {grade}\nපන්ති ක්‍රමය: {method}\nදුර: {distance}කි.මී.\nදින ගණන: {frequency} වරක්/සතියට\nසිසුන් ගණන: {students}\n\nමාසික ගාස්තුව: රු. {monthlyFee}\nඑක් දිනකට: රු. {sessionFee}\n\nඅමතන්න: 0787124080"
+    whatsappMessage: "පන්ති ගාස්තු ගණකය\n\nශ්‍රේණිය: {grade}\nපන්ති ක්‍රමය: {method}\nදුර: {distance}කි.මී.\nදින ගණන: {frequency} වරක්/සතියට\nසිසුන් ගණන: {students}\n\nමාසික ගාස්තුව: රු. {monthlyFee}\nඑක් දිනකට: රු. {sessionFee}\n\nඅමතන්න: 0787124080",
+    bank: {
+      title: "අන්තර්ජාල පන්ති සඳහා බැංකු විස්තර",
+      account: "ගිණුම් අංකය: 0088532455",
+      bank: "ලංකා බැංකුව",
+      branch: "වාරියපොල ශාඛාව (379)",
+      holder: "ගිණුම් හිමියා: MR N M N L N BANDARA",
+      copy: "පිටපත් කිරීමට ක්ලික් කරන්න",
+      paymentNote: "සටහන: කරුණාකර ගෙවීම සිදු කර එහි රිසිට්පත ඔබේ ගුරුතුමාට ලබා දෙන්න."
+    }
   }
 }

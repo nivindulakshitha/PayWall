@@ -50,8 +50,8 @@ export default function Calculator() {
 
   const steps = [
     { id: 'grade', label: t('steps.grade'), icon: '01' },
-    { id: 'location', label: t('steps.location'), icon: '02' },
-    { id: 'method', label: t('steps.method'), icon: '03' },
+    { id: 'method', label: t('steps.method'), icon: '02' },
+    { id: 'location', label: inputs.method === 'online' ? t('steps.payment') : t('steps.location'), icon: '03' },
     { id: 'frequency', label: t('steps.frequency'), icon: '04' },
     { id: 'hours', label: t('steps.hours'), icon: '05' },
     { id: 'students', label: t('steps.students'), icon: '06' },
@@ -276,8 +276,13 @@ export default function Calculator() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                 {[
                   { label: t('labels.grade'), value: inputs.grade === 'al' ? 'A/L' : inputs.grade === 'ol' ? 'O/L' : '6-9', step: 0, color: 'indigo' },
-                  { label: t('labels.location'), value: `${inputs.distance + 7}km`, step: 1, color: 'blue' },
-                  { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 2, color: 'cyan' },
+                  { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 1, color: 'cyan' },
+                  { 
+                    label: t('labels.location'), 
+                    value: inputs.method === 'online' ? t('labels.notApplicable') : `${inputs.distance + 7}km`, 
+                    step: 2, 
+                    color: 'blue' 
+                  },
                   { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 3, color: 'violet' },
                   { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 4, color: 'purple' },
                   { label: t('labels.students'), value: `${inputs.students}`, step: 5, color: 'fuchsia' },

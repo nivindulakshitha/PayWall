@@ -11,8 +11,8 @@ export interface FeeCalculationInputs {
 
 export interface FeeBreakdown {
   baseFee: number
-  distanceSurcharge: number // Fuel charge based on distance
-  fuelCharge: number // Student charge per student
+  fuelCharge: number // Fuel charge based on distance
+  studentCharge: number // Student charge per student
   hoursSurcharge: number // Extra hours surcharge
   frequencySurcharge: number
   groupDiscount: number
@@ -72,19 +72,20 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     hoursSurcharge = baseFee * EXTRA_HOURS_SURCHARGE_PERCENT * extraHours
   }
 
-  // Distance & Student charges (only for physical)
-  let distanceSurcharge = 0
+  // Fuel & Student charges
   let fuelCharge = 0
+  let studentCharge = 0
   const totalDistance = distance + DISTANCE_CONSTANT_KM
 
   if (method === 'physical') {
     // Fuel charge: totalDistance × 2 (round trip) × Rs.FUEL_CHARGE_PER_KM/km × frequency × 4 weeks
     const roundTripDistance = totalDistance * FUEL_ROUND_TRIP_MULTIPLIER
-    distanceSurcharge = roundTripDistance * FUEL_CHARGE_PER_KM * frequency * 4
-    // Student charge: Grade-based multiplier × number of students
-    const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
-    fuelCharge = studentMultiplierRate * students
+    fuelCharge = roundTripDistance * FUEL_CHARGE_PER_KM * frequency * 4
   }
+
+  // Student charge: Grade-based multiplier × number of students (Applies to both Online & Physical)
+  const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
+  studentCharge = studentMultiplierRate * students
 
   // Get student rate for display
   const studentRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
@@ -97,7 +98,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   }
 
   // Monthly subtotal before discount
-  const subtotalBeforeDiscount = baseFee + distanceSurcharge + fuelCharge + frequencySurcharge + hoursSurcharge
+  const subtotalBeforeDiscount = baseFee + fuelCharge + studentCharge + frequencySurcharge + hoursSurcharge
 
   // Group discount based on number of students
   let groupDiscount = 0
@@ -117,8 +118,8 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
 
   return {
     baseFee,
-    distanceSurcharge,
     fuelCharge,
+    studentCharge,
     hoursSurcharge,
     frequencySurcharge,
     groupDiscount,
@@ -154,8 +155,7 @@ export function generateWhatsAppMessage(
 *Selected Details:*
 - Grade: ${gradeLabel}
 - Method: ${methodLabel}
-- Distance from home: ${totalDistance}km
-- Frequency: ${frequencyLabel}
+${inputs.method === 'physical' ? `- Total Distance: ${totalDistance}km\n` : ''}- Frequency: ${frequencyLabel}
 - Duration: ${breakdown.hours}hrs
 - Students: ${studentLabel}
 
@@ -165,10 +165,10 @@ Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
 
 *Fee Breakdown:*
 - Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
-- Fuel Charge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
-- Student Charge (${inputs.students}x): Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
+${breakdown.fuelCharge > 0 ? `- Fuel Charge: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}\n` : ''}- Student Charge (${inputs.students}x): Rs. ${breakdown.studentCharge.toLocaleString('en-LK')}
 - Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
 ${breakdown.hoursSurcharge > 0 ? `- Extra Hours Surcharge: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
 *Contact: 0787124080*
+${inputs.method === 'online' ? '\n*Bank Details:*\nBank of Ceylon\nWariyapola Branch (379)\n0088532455\nMR N M N L N BANDARA\n' : ''}
 _Share this message with your class mates!_`
 }
