@@ -79,7 +79,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.enterDistance')}</p>
             <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-gray-500 mb-2 uppercase tracking-wider">
                 {t('labels.location')}
               </label>
               <div className="relative">
@@ -140,7 +140,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   <div className={`mx-auto mb-3 ${inputs.method === option.value ? 'text-indigo-400' : 'text-gray-500'} transition-colors`}>
                     {option.icon}
                   </div>
-                  <p className={`text-sm font-semibold ${inputs.method === option.value ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
+                  <p className={`text-base font-bold ${inputs.method === option.value ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
                     {option.label}
                   </p>
                 </motion.button>
@@ -167,7 +167,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   <p className={`text-2xl font-bold mb-1 ${inputs.frequency === freq ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
                     {freq}x
                   </p>
-                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">/ week</p>
+                  <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">/ week</p>
                 </motion.button>
               ))}
             </div>
@@ -179,7 +179,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectHours')}</p>
             <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">
                 {t('labels.hours')}
               </label>
               <div className="flex items-center gap-3">

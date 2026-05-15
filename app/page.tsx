@@ -3,10 +3,8 @@
 import Image from 'next/image'
 import Calculator from '@/components/Calculator'
 import LanguageToggle from '@/components/LanguageToggle'
-import { useLanguage } from '@/lib/i18n'
 
 export default function Home() {
-  const { t } = useLanguage()
 
   return (
     <main className="min-h-screen relative py-4 px-3 sm:py-6 sm:px-4 md:py-10">

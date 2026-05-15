@@ -289,8 +289,8 @@ export default function Calculator() {
                     onClick={() => handleEdit(item.step)}
                     className="stat-card cursor-pointer group hover:border-indigo-500/30"
                   >
-                    <p className="text-xs font-bold text-gray-500 mb-1 group-hover:text-gray-400 transition-colors truncate">{item.label}</p>
-                    <p className="text-xl font-black text-white group-hover:text-indigo-300 transition-colors truncate">{item.value}</p>
+                    <p className="text-xs font-semibold text-gray-500 mb-1 group-hover:text-gray-400 transition-colors truncate">{item.label}</p>
+                    <p className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors truncate">{item.value}</p>
                   </motion.div>
                 ))}
               </div>

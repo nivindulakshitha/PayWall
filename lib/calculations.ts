@@ -53,11 +53,7 @@ const DEFAULT_HOURS: Record<string, number> = {
   'ol': 2,    // 2 hours
   'al': 3,    // 3 hours
 }
-const GROUP_DISCOUNTS: Record<number, number> = {
-  1: 0,
-  2: 0.05, // -5% for 2 students
-  3: 0.10, // -10% for 3+
-}
+
 
 export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const { grade, distance, method, frequency, students, hours } = inputs

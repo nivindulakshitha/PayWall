@@ -219,7 +219,7 @@ body::after {
   }
 
   .option-card {
-    @apply rounded-xl p-4 transition-all duration-300 cursor-pointer;
+    @apply rounded-xl p-4 transition-all duration-300 cursor-pointer min-h-[120px] flex flex-col items-center justify-center;
     background: rgba(255, 255, 255, 0.03);
     border: 1.5px solid rgba(255, 255, 255, 0.06);
   }
@@ -301,8 +301,7 @@ body::after {
   font-family: 'Inter', "Noto Sans Sinhala", sans-serif;
   font-optical-sizing: auto;
   font-variation-settings: "wdth" 100;
-  font-size: 0.93em; /* Sinhala glyphs are wider — scale down slightly */
-  line-height: 1.9;
+  line-height: 2.0; 
 }
 
 /* Scrollbar */
