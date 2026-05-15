@@ -21,6 +21,7 @@ export interface FeeBreakdown {
   studentMultiplier?: number // For display: number of students
   distanceKm?: number // For display: total distance
   hours?: number // For display: class hours
+  studentRate?: number // For display: per-student rate from grade
 }
 
 const BASE_FEES: Record<string, number> = {
@@ -68,7 +69,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     hoursSurcharge = baseFee * EXTRA_HOURS_SURCHARGE_PERCENT * extraHours
   }
 
-  // Distance & Student charges (only for physical, add 8km constant)
+  // Distance & Student charges (only for physical)
   let distanceSurcharge = 0
   let fuelCharge = 0
   const totalDistance = distance + DISTANCE_CONSTANT_KM
@@ -82,6 +83,9 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     fuelCharge = studentMultiplierRate * students
   }
 
+  // Get student rate for display
+  const studentRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
+
   // Frequency surcharge (+10% per extra session beyond 1x/week)
   let frequencySurcharge = 0
   if (frequency > 1) {
@@ -92,8 +96,12 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   // Monthly subtotal before discount
   const subtotalBeforeDiscount = baseFee + distanceSurcharge + fuelCharge + frequencySurcharge + hoursSurcharge
 
-  // Group discount (removed - no student limit)
-  const groupDiscount = 0
+  // Group discount based on number of students
+  let groupDiscount = 0
+  if (students >= 2) {
+    const discountRate = students >= 3 ? 0.10 : 0.05
+    groupDiscount = subtotalBeforeDiscount * discountRate
+  }
 
   // Monthly fee
   let monthlyFee = subtotalBeforeDiscount - groupDiscount
@@ -116,6 +124,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     studentMultiplier: students,
     distanceKm: totalDistance,
     hours: classHours,
+    studentRate,
   }
 }
 
@@ -137,7 +146,7 @@ export function generateWhatsAppMessage(
 ): string {
   const totalDistance = inputs.distance + DISTANCE_CONSTANT_KM
   
-  return `*📚 Class Fee Calculator*
+  return `*💰 Class Fee Calculator*
 
 *Selected Details:*
 • Grade: ${gradeLabel}
@@ -148,10 +157,10 @@ export function generateWhatsAppMessage(
 • Students: ${studentLabel}
 
 *💰 Fee Summary:*
-┌─────────────────────────────
+┌─────────────────────────
 │ Monthly Fee: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
 │ Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
-└─────────────────────────────
+└─────────────────────────
 
 *📊 Fee Breakdown:*
 • Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}

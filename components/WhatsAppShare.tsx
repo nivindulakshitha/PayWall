@@ -49,6 +49,10 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       transition={{ duration: 0.3, delay: 0.2 }}
       className="mt-6 space-y-4"
     >
+      <p className="text-center text-sm text-gray-700 font-semibold">
+        {t('messages.shareMessage') || 'Please send these details and share with your friends:'}
+      </p>
+
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

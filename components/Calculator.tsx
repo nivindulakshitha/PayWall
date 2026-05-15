@@ -229,7 +229,7 @@ export default function Calculator() {
             </div>
           </motion.div>
 
-          <FeeBreakdown breakdown={breakdown} />
+          <FeeBreakdown breakdown={breakdown} frequency={inputs.frequency} />
           <WhatsAppShare inputs={inputs} breakdown={breakdown} />
         </motion.div>
       )}

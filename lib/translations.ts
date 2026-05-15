@@ -49,8 +49,10 @@ export const translations = {
     results: {
       monthlyFee: "Monthly Fee",
       perStudentFee: "Per Student Fee",
+      oneDayFee: "One Day Fee",
       sessionFee: "Per Session Fee",
       breakdown: "Fee Breakdown",
+      detailedBreakdown: "Detailed Fee Calculation",
       baseFee: "Base Fee",
       distanceSurcharge: "Distance Charge",
       frequencySurcharge: "Frequency Surcharge",
@@ -68,7 +70,8 @@ export const translations = {
       selectFrequency: "Select session frequency",
       selectHours: "Select class duration in hours",
       selectStudents: "Specify number of students",
-      copiedToClipboard: "Copied to clipboard!"
+      copiedToClipboard: "Copied to clipboard!",
+      shareMessage: "Please send these details and share with your friends:"
     },
     payingFrequencies: {
       monthly: "Monthly",
@@ -120,8 +123,10 @@ export const translations = {
     results: {
       monthlyFee: "මාසික ගාස්තුව",
       perStudentFee: "එක් ශිෂ්‍යයට ගාස්තුව",
+      oneDayFee: "එක් දිනකට ගාස්තුව",
       sessionFee: "එක් සැසියට ගාස්තුව",
       breakdown: "ගාස්තු විස්තර",
+      detailedBreakdown: "විස්තරාත්මක ගාස්තු ගණනය",
       baseFee: "මූල ගාස්තුව",
       distanceSurcharge: "දුරස්ථ අধිරූප",
       frequencySurcharge: "අතිරේක සැසි ශුල්කය",
@@ -139,7 +144,8 @@ export const translations = {
       selectFrequency: "සතිපතින සැසි සංඛ්‍යාව තෝරන්න",
       selectHours: "පන්තිවල තිස්සේ තෝරන්න",
       selectStudents: "ශිෂ්‍ය සංඛ්‍යාව තෝරන්න",
-      copiedToClipboard: "පසුරු පුවරුවට පිටපත් විය!"
+      copiedToClipboard: "පසුරු පුවරුවට පිටපත් විය!",
+      shareMessage: "කරුණාකර මෙම විස්තර મිතුරුවරුන් සමඟ එවන්න:"
     },
     payingFrequencies: {
       monthly: "මාසිකව",
