@@ -18,6 +18,8 @@ export interface FeeBreakdown {
   groupDiscount: number
   monthlyFee: number
   perStudentFee: number
+  adjustment: number
+  perStudentAdjustment: number
   studentMultiplier?: number // For display: number of students
   distanceKm?: number // For display: total distance
   hours?: number // For display: class hours
@@ -107,14 +109,22 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     groupDiscount = subtotalBeforeDiscount * discountRate
   }
 
-  // Monthly fee
-  let monthlyFee = subtotalBeforeDiscount - groupDiscount
+  // 1. Initial Monthly fee
+  const rawMonthlyFee = subtotalBeforeDiscount - groupDiscount
 
-  // Round monthly fee to nearest 500
-  monthlyFee = roundToNearest500(monthlyFee)
+  // 2. Calculate exact per-student fee
+  const perStudentExact = rawMonthlyFee / students
 
-  // Per-student monthly fee
-  const perStudentFee = Math.ceil(monthlyFee / students)
+  // 3. Round per-student fee to nearest 100
+  // 2834 -> 2800, 2890 -> 2900, 2850 -> 2900
+  const perStudentFee = Math.ceil(perStudentExact / 100) * 100
+
+  // 4. Final adjusted monthly fee
+  const monthlyFee = perStudentFee * students
+
+  // 5. Rounding adjustment for breakdown
+  const adjustment = monthlyFee - rawMonthlyFee
+  const perStudentAdjustment = perStudentFee - perStudentExact
 
   return {
     baseFee,
@@ -125,6 +135,8 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     groupDiscount,
     monthlyFee,
     perStudentFee,
+    adjustment,
+    perStudentAdjustment,
     studentMultiplier: students,
     distanceKm: totalDistance,
     hours: classHours,
@@ -140,35 +152,53 @@ export function formatCurrency(amount: number): string {
   return `Rs. ${amount.toLocaleString('en-LK')}`
 }
 
+import { translations, Language } from './translations'
+
 export function generateWhatsAppMessage(
   inputs: FeeCalculationInputs,
   breakdown: FeeBreakdown,
   gradeLabel: string,
   methodLabel: string,
   frequencyLabel: string,
-  studentLabel: string
+  studentLabel: string,
+  language: Language = 'en'
 ): string {
-  const totalDistance = inputs.distance + DISTANCE_CONSTANT_KM
+  const t = (key: string) => {
+    const keys = key.split('.')
+    let val: any = translations[language]
+    for (const k of keys) {
+      if (val && typeof val === 'object' && k in val) val = val[k]
+      else return key
+    }
+    return String(val)
+  }
 
-  return `*Class Fee Calculator*
+  const totalDistance = inputs.distance + 7
 
-*Selected Details:*
-- Grade: ${gradeLabel}
-- Method: ${methodLabel}
-${inputs.method === 'physical' ? `- Total Distance: ${totalDistance}km\n` : ''}- Frequency: ${frequencyLabel}
-- Duration: ${breakdown.hours}hrs
-- Students: ${studentLabel}
+  return `*${t('results.feeSummary')}*
+- ${t('results.grade')}: ${gradeLabel}
+- ${t('results.method')}: ${methodLabel}
+${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km\n` : ''}- ${t('results.frequency')}: ${frequencyLabel}
+- ${t('results.duration')}: ${breakdown.hours}hrs
+- ${t('results.students')}: ${studentLabel}
 
-*Fee Summary:*
-Monthly Fee: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
-Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
+*${t('results.feeBreakdown')}*
+- ${t('results.baseFee')}: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
+${breakdown.fuelCharge > 0 ? `- ${t('results.fuelCharge')}: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}\n` : ''}- ${t('results.studentCharge')} (${inputs.students}x): Rs. ${breakdown.studentCharge.toLocaleString('en-LK')}
+- ${t('results.frequencySurcharge')}: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
+${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Rs. ${breakdown.perStudentAdjustment.toFixed(0)} x ${inputs.students})` : ''}
+${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}` : ''}
 
-*Fee Breakdown:*
-- Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
-${breakdown.fuelCharge > 0 ? `- Fuel Charge: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}\n` : ''}- Student Charge (${inputs.students}x): Rs. ${breakdown.studentCharge.toLocaleString('en-LK')}
-- Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
-${breakdown.hoursSurcharge > 0 ? `- Extra Hours Surcharge: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
-*Contact: 0787124080*
-${inputs.method === 'online' ? '\n*Bank Details:*\nBank of Ceylon\nWariyapola Branch (379)\n0088532455\nMR N M N L N BANDARA\n' : ''}
-_Share this message with your class mates!_`
+*${t('results.accordingly')}*
+${t('results.monthlyFee')}: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
+${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
+
+» *${t('results.contact')}: 0787124080*
+
+» _${t('results.politeNote')}_
+
+» _${t('results.paymentDeadline')}_
+${inputs.method === 'online' ? `\n» *${t('results.bankDetails')}*\n${t('bank.bank')}\n${t('bank.branch')}\n${t('bank.account')}\n${t('bank.holder')}\n` : ''}
+
+> _${t('results.shareNote')}_`
 }

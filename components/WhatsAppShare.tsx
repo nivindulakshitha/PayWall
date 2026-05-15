@@ -11,7 +11,7 @@ interface WhatsAppShareProps {
 }
 
 export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps) {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
 
   const getGradeLabel = () => {
     const gradeLabels: Record<string, string> = {
@@ -33,7 +33,8 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       getGradeLabel(),
       getMethodLabel(),
       `${inputs.frequency}x/week`,
-      `${inputs.students}`
+      `${inputs.students}`,
+      language
     )
 
     // Generate link
