@@ -154,7 +154,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
               </div>
               <div className="p-3 rounded-lg" style={{ background: 'rgba(52, 211, 153, 0.06)', border: '1px solid rgba(52, 211, 153, 0.1)' }}>
                 <p className="text-xs text-emerald-400/80">
-                  Note: Please make the payment and share the receipt with your teacher.
+                  {t('bank.paymentNote')}
                 </p>
               </div>
             </motion.div>
