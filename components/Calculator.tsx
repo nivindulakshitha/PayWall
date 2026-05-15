@@ -101,7 +101,7 @@ export default function Calculator() {
       {/* Progress Bar */}
       <div className="glass-card !p-4 !rounded-2xl">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
+          <span className="text-sm font-bold text-gray-500 uppercase tracking-widest">
             {showResults ? t('steps.summary') : `Step ${currentStep + 1}/${steps.length}`}
           </span>
           {showResults && (
@@ -111,7 +111,7 @@ export default function Calculator() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleReset}
-              className="text-xs font-medium text-rose-400 hover:text-rose-300 transition-colors flex items-center gap-1"
+              className="text-sm font-bold text-rose-400 hover:text-rose-300 transition-colors flex items-center gap-1"
             >
               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -270,13 +270,13 @@ export default function Calculator() {
               className="glass-card"
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">{t('results.summary')}</h3>
-                <span className="text-[10px] text-gray-600">tap to edit</span>
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('results.summary')}</h3>
+                <span className="text-xs font-bold text-gray-600">tap to edit</span>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                 {[
                   { label: t('labels.grade'), value: inputs.grade === 'al' ? 'A/L' : inputs.grade === 'ol' ? 'O/L' : '6-9', step: 0, color: 'indigo' },
-                  { label: t('labels.location'), value: `${inputs.distance + 8}km`, step: 1, color: 'blue' },
+                  { label: t('labels.location'), value: `${inputs.distance + 7}km`, step: 1, color: 'blue' },
                   { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 2, color: 'cyan' },
                   { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 3, color: 'violet' },
                   { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 4, color: 'purple' },
@@ -289,8 +289,8 @@ export default function Calculator() {
                     onClick={() => handleEdit(item.step)}
                     className="stat-card cursor-pointer group hover:border-indigo-500/30"
                   >
-                    <p className="text-[10px] text-gray-500 mb-1 group-hover:text-gray-400 transition-colors truncate">{item.label}</p>
-                    <p className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors truncate">{item.value}</p>
+                    <p className="text-xs font-bold text-gray-500 mb-1 group-hover:text-gray-400 transition-colors truncate">{item.label}</p>
+                    <p className="text-xl font-black text-white group-hover:text-indigo-300 transition-colors truncate">{item.value}</p>
                   </motion.div>
                 ))}
               </div>

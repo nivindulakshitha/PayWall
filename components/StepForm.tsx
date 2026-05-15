@@ -92,11 +92,11 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   className="input-field text-lg font-semibold pr-12"
                   placeholder="0"
                 />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-500 font-medium">km</span>
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-base text-gray-500 font-bold">km</span>
               </div>
               <div className="mt-3 p-3 rounded-lg" style={{ background: 'rgba(99, 102, 241, 0.06)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
-                <p className="text-xs text-indigo-300/80">
-                  Total: {inputs.distance + 8}km (distance + 8km constant)
+                <p className="text-sm font-bold text-indigo-300/80">
+                  Total: {inputs.distance + 7}km (distance + 7km constant)
                 </p>
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   <p className={`text-2xl font-bold mb-1 ${inputs.frequency === freq ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
                     {freq}x
                   </p>
-                  <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">/ week</p>
+                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">/ week</p>
                 </motion.button>
               ))}
             </div>
@@ -212,9 +212,9 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
                   +
                 </motion.button>
               </div>
-              <p className="text-center text-xs text-gray-600 mt-2">hours per session</p>
+              <p className="text-center text-sm font-bold text-gray-600 mt-2 lowercase">hours per session</p>
               <div className="mt-3 p-3 rounded-lg" style={{ background: 'rgba(245, 158, 11, 0.06)', border: '1px solid rgba(245, 158, 11, 0.1)' }}>
-                <p className="text-xs text-amber-400/80">
+                <p className="text-sm font-bold text-amber-400/80">
                   Default: 6-9 &amp; O/L = 2hrs, A/L = 3hrs
                 </p>
               </div>
@@ -227,7 +227,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectStudents')}</p>
             <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">
                 {t('labels.students')}
               </label>
               <div className="flex items-center gap-3">

@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FeeBreakdown, formatCurrency } from '@/lib/calculations'
+import { FeeBreakdown, formatCurrency, FUEL_CHARGE_PER_KM } from '@/lib/calculations'
 import { useLanguage } from '@/lib/i18n'
 
 interface FeeBreakdownProps {
@@ -111,7 +111,9 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
             <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.fuelCharge')}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">({breakdown.distanceKm && breakdown.distanceKm - 8} + 8) x 2 x Rs.10 x {frequency} x 4w</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">
+                  {breakdown.distanceKm}km × 2 (round trip) × Rs.{FUEL_CHARGE_PER_KM}/km × {frequency}x × 4w
+                </p>
               </div>
               <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.distanceSurcharge)}</p>
             </div>
