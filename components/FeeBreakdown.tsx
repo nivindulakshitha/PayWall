@@ -173,7 +173,9 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
             <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.adjustment')}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">{t('results.adjustmentDesc')}</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">
+                  {t('results.adjustmentDesc')} (Rs. {breakdown.perStudentAdjustment.toFixed(0)} x {breakdown.studentMultiplier})
+                </p>
               </div>
               <p className={`text-sm font-semibold tabular-nums ${breakdown.adjustment > 0 ? 'text-amber-400' : 'text-emerald-400'}`}>
                 {breakdown.adjustment > 0 ? `+ ${formatCurrency(breakdown.adjustment)}` : `- ${formatCurrency(Math.abs(breakdown.adjustment))}`}
