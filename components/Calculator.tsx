@@ -280,11 +280,25 @@ export default function Calculator() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="glass-card"
+              className="glass-card relative overflow-hidden"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('results.summary')}</h3>
-                <span className="text-xs font-bold text-gray-600">tap to edit</span>
+              {/* Decorative background fee */}
+              <div className="absolute -bottom-8 -right-4 pointer-events-none select-none z-0 opacity-[0.04] blur-[3px] transition-all duration-700">
+                <span className="text-[100px] md:text-[140px] font-black tracking-tighter leading-none text-white italic">
+                  {breakdown.monthlyFee.toLocaleString('en-LK')}
+                </span>
+              </div>
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('results.summary')}</h3>
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                    <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-tight">interactive</span>
+                  </div>
+                </div>
+                <p className="text-[11px] text-gray-500 font-medium">
+                  {t('results.summaryInstruction')}
+                </p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                 {[
@@ -312,6 +326,23 @@ export default function Calculator() {
                     <p className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors truncate">{item.value}</p>
                   </motion.div>
                 ))}
+
+                {/* Education Note Box - Fills the remaining space */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="col-span-1 md:col-span-2 rounded-2xl p-4 flex items-center justify-center text-center relative overflow-hidden"
+                  style={{ 
+                    background: 'rgba(10, 14, 26, 0.3)', 
+                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    backdropFilter: 'blur(16px)'
+                  }}
+                >
+                  <p className="text-[11px] md:text-xs text-white/90 font-bold leading-relaxed max-w-[280px]">
+                    {t('results.educationNote')}
+                  </p>
+                </motion.div>
               </div>
             </motion.div>
 

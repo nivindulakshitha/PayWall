@@ -37,53 +37,101 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
       animate="show"
       className="space-y-4"
     >
-      {/* Hero Fee Cards */}
-      <div className="grid grid-cols-3 gap-2.5">
-        <motion.div
-          variants={itemVariants}
-          className="rounded-2xl p-4 relative overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(99, 102, 241, 0.04))',
-            border: '1px solid rgba(99, 102, 241, 0.15)',
-          }}
-        >
-          <div className="absolute top-0 right-0 w-16 h-16 rounded-full bg-indigo-500/5 blur-xl" />
-          <p className="text-[10px] font-semibold text-indigo-400/80 uppercase tracking-wider mb-2">{t('results.monthlyFee')}</p>
-          <p className="text-xl md:text-2xl font-extrabold text-white leading-none">
-            Rs. {breakdown.monthlyFee.toLocaleString('en-LK')}
-          </p>
-        </motion.div>
+      {/* Hero Fee Visualization */}
+      <motion.div variants={itemVariants} className="relative mb-6 p-1">
+        <div className="flex items-stretch gap-0 relative">
+          {/* Main Root: Monthly Fee */}
+          <div className="z-10 w-[42%]">
+            <div 
+              className="h-full rounded-2xl p-4 md:p-5 relative overflow-hidden flex flex-col justify-center"
+              style={{
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(99, 102, 241, 0.06))',
+                border: '1px solid rgba(99, 102, 241, 0.2)',
+                boxShadow: '0 0 40px rgba(99, 102, 241, 0.08)',
+              }}
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-indigo-500/10 blur-2xl -mr-8 -mt-8" />
+              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] mb-2">{t('results.monthlyFee')}</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl md:text-3xl font-black text-white tabular-nums tracking-tight">
+                  Rs. {breakdown.monthlyFee.toLocaleString('en-LK')}
+                </span>
+              </div>
+            </div>
+          </div>
 
-        <motion.div
-          variants={itemVariants}
-          className="rounded-2xl p-4 relative overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0.04))',
-            border: '1px solid rgba(139, 92, 246, 0.15)',
-          }}
-        >
-          <div className="absolute top-0 right-0 w-16 h-16 rounded-full bg-purple-500/5 blur-xl" />
-          <p className="text-[10px] font-semibold text-purple-400/80 uppercase tracking-wider mb-2">{t('results.perStudentFee')}</p>
-          <p className="text-xl md:text-2xl font-extrabold text-white leading-none">
-            Rs. {breakdown.perStudentFee.toLocaleString('en-LK')}
-          </p>
-        </motion.div>
+          {/* Branching Lines (SVG) */}
+          <div className="relative w-8 md:w-12 flex-shrink-0">
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 40 100" preserveAspectRatio="none">
+              {/* Top Branch */}
+              <path 
+                d="M 0 50 Q 20 50, 20 25 L 40 25" 
+                fill="none" 
+                stroke="rgba(139, 92, 246, 0.3)" 
+                strokeWidth="2" 
+                strokeLinecap="round"
+              />
+              {/* Bottom Branch */}
+              <path 
+                d="M 0 50 Q 20 50, 20 75 L 40 75" 
+                fill="none" 
+                stroke="rgba(16, 185, 129, 0.3)" 
+                strokeWidth="2" 
+                strokeLinecap="round"
+              />
+              {/* Connecting Dots */}
+              <circle cx="0" cy="50" r="3" fill="rgba(99, 102, 241, 0.6)" />
+              <circle cx="40" cy="25" r="2.5" fill="rgba(139, 92, 246, 0.5)" />
+              <circle cx="40" cy="75" r="2.5" fill="rgba(16, 185, 129, 0.5)" />
+            </svg>
+          </div>
 
-        <motion.div
-          variants={itemVariants}
-          className="rounded-2xl p-4 relative overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.04))',
-            border: '1px solid rgba(16, 185, 129, 0.15)',
-          }}
-        >
-          <div className="absolute top-0 right-0 w-16 h-16 rounded-full bg-emerald-500/5 blur-xl" />
-          <p className="text-[10px] font-semibold text-emerald-400/80 uppercase tracking-wider mb-2">{t('results.oneDayFee')}</p>
-          <p className="text-xl md:text-2xl font-extrabold text-white leading-none">
-            Rs. {oneDayFee.toLocaleString('en-LK')}
-          </p>
-        </motion.div>
-      </div>
+          {/* Leaf Nodes: Components */}
+          <div className="flex-1 flex flex-col gap-2.5">
+            {/* Per Student Node */}
+            <div 
+              className="flex-1 rounded-xl p-3 md:p-4 relative overflow-hidden flex flex-col justify-center"
+              style={{
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0.04))',
+                border: '1px solid rgba(139, 92, 246, 0.15)',
+              }}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-[9px] font-bold text-purple-400/80 uppercase tracking-wider mb-1">{t('results.perStudentFee')}</p>
+                  <p className="text-sm md:text-base font-bold text-white tabular-nums">
+                    Rs. {breakdown.perStudentFee.toLocaleString('en-LK')} <span className="text-purple-400/60 font-medium">× {breakdown.studentMultiplier}</span>
+                  </p>
+                </div>
+                <div className="text-[9px] font-medium text-gray-500 italic hidden md:block">
+                  ({t('results.students')})
+                </div>
+              </div>
+            </div>
+
+            {/* One Day Node */}
+            <div 
+              className="flex-1 rounded-xl p-3 md:p-4 relative overflow-hidden flex flex-col justify-center"
+              style={{
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.04))',
+                border: '1px solid rgba(16, 185, 129, 0.15)',
+              }}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-[9px] font-bold text-emerald-400/80 uppercase tracking-wider mb-1">{t('results.oneDayFee')}</p>
+                  <p className="text-sm md:text-base font-bold text-white tabular-nums">
+                    Rs. {oneDayFee.toLocaleString('en-LK')} <span className="text-emerald-400/60 font-medium">× {sessionsPerMonth}</span>
+                  </p>
+                </div>
+                <div className="text-[9px] font-medium text-gray-500 italic hidden md:block">
+                  ({t('results.frequency')})
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Detailed Breakdown */}
       <motion.div
