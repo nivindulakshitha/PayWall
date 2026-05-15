@@ -57,11 +57,11 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
 
   // Base fee (monthly)
   const baseFee = BASE_FEES[grade] || BASE_FEES['6-9']
-  
+
   // Get default hours for grade if not provided
   const classHours = hours || DEFAULT_HOURS[grade] || 2
   const defaultHours = DEFAULT_HOURS[grade] || 2
-  
+
   // Hours surcharge: 10% of base per extra hour beyond default
   let hoursSurcharge = 0
   if (classHours > defaultHours) {
@@ -145,28 +145,27 @@ export function generateWhatsAppMessage(
   studentLabel: string
 ): string {
   const totalDistance = inputs.distance + DISTANCE_CONSTANT_KM
-  
-  return `*💰 Class Fee Calculator*
+
+  return `*Class Fee Calculator*
 
 *Selected Details:*
-• Grade: ${gradeLabel}
-• Method: ${methodLabel}
-• Distance from home: ${totalDistance}km
-• Frequency: ${frequencyLabel}
-• Duration: ${breakdown.hours}hrs
-• Students: ${studentLabel}
+- Grade: ${gradeLabel}
+- Method: ${methodLabel}
+- Distance from home: ${totalDistance}km
+- Frequency: ${frequencyLabel}
+- Duration: ${breakdown.hours}hrs
+- Students: ${studentLabel}
 
-*💰 Fee Summary:*
-┌─────────────────────────
-│ Monthly Fee: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
-│ Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
-└─────────────────────────
+*Fee Summary:*
+Monthly Fee: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
+Per Student: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
 
-*📊 Fee Breakdown:*
-• Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
-• Fuel Charge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
-• Student Charge (1x): Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
-• Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
-${breakdown.hoursSurcharge > 0 ? `• Extra Hours Surcharge: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
-*Contact: 0787124080*`
+*Fee Breakdown:*
+- Base Fee: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
+- Fuel Charge: Rs. ${breakdown.distanceSurcharge.toLocaleString('en-LK')}
+- Student Charge (${inputs.students}x): Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}
+- Frequency Surcharge: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
+${breakdown.hoursSurcharge > 0 ? `- Extra Hours Surcharge: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
+*Contact: 0787124080*
+_Share this message with your friends_`
 }

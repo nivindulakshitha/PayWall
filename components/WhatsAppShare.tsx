@@ -32,8 +32,8 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       breakdown,
       getGradeLabel(),
       getMethodLabel(),
-      `${inputs.frequency}x ${t('labels.frequency')}`,
-      `${inputs.students} ${t('labels.students')}`
+      `${inputs.frequency}x/week`,
+      `${inputs.students}`
     )
 
     const encodedMessage = encodeURIComponent(message)
