@@ -71,7 +71,8 @@ export const translations = {
       selectHours: "Select class duration in hours",
       selectStudents: "Specify number of students",
       copiedToClipboard: "Copied to clipboard!",
-      shareMessage: "Please send these details to your teacher and classmates!"
+      shareMessage: "Please send these details to your teacher and classmates!",
+      linkText: "[ View & Edit Calculation ]\n"
     },
     payingFrequencies: {
       monthly: "Monthly",
@@ -146,7 +147,8 @@ export const translations = {
       selectHours: "පන්තියේ කාලසීමාව තෝරන්න",
       selectStudents: "සිසුන් ගණන තෝරන්න",
       copiedToClipboard: "පිටපත් කරගන්නා ලදී!",
-      shareMessage: "කරුණාකර මෙම විස්තර ඔබගේ ගුරුතුමාට සහ පන්තියේ ළමුන්ට ලබා දෙන්න!"
+      shareMessage: "කරුණාකර මෙම විස්තර ඔබගේ ගුරුතුමාට සහ පන්තියේ ළමුන්ට ලබා දෙන්න!",
+      linkText: "[ ගණනය කිරීම් වෙනස් කරන්න / View & Edit ]\n"
     },
     payingFrequencies: {
       monthly: "මාසිකව",

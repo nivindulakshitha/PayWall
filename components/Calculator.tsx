@@ -1,7 +1,7 @@
 // components/Calculator.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { calculateFees, FeeCalculationInputs } from '@/lib/calculations'
 import { useLanguage } from '@/lib/i18n'
@@ -23,10 +23,27 @@ export default function Calculator() {
     hours: 2, // Default for O/L is 2 hours
   })
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('g')) {
+        setInputs({
+          grade: (params.get('g') || 'ol') as '6-9' | 'ol' | 'al',
+          distance: parseFloat(params.get('d') || '0'),
+          method: (params.get('m') || 'physical') as 'online' | 'physical',
+          frequency: parseInt(params.get('f') || '1', 10),
+          hours: parseInt(params.get('h') || '2', 10),
+          students: parseInt(params.get('s') || '1', 10),
+        })
+        setShowResults(true)
+      }
+    }
+  }, [])
+
   const breakdown = calculateFees(inputs)
 
   // Update hours when grade changes
-  const handleGradeChange = (grade: string) => {
+  const handleGradeChange = (grade: '6-9' | 'ol' | 'al') => {
     const defaultHours = grade === 'al' ? 3 : 2
     setInputs({ ...inputs, grade, hours: defaultHours })
   }

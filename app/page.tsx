@@ -9,7 +9,7 @@ export default function Home() {
   const { t } = useLanguage()
 
   return (
-    <main className="min-h-screen relative py-6 px-4 md:py-10">
+    <main className="min-h-screen relative py-4 px-3 sm:py-6 sm:px-4 md:py-10">
 
       {/* ─── Fixed background layer ─────────────────────────────── */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -19,18 +19,16 @@ export default function Home() {
         <div className="absolute -bottom-48 -right-48 w-[500px] h-[500px] rounded-full bg-emerald-500/5 blur-3xl animate-float-medium" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-indigo-600/[0.03] blur-3xl" />
 
-        {/* ── Personal photo — left edge, half-visible ── */}
-        {/*   Large portrait shifted left so ~half peeks in   */}
+        {/* ── Personal photo — left edge (hidden on very small screens) ── */}
         <div
-          className="absolute bottom-0 -left-[160px] md:-left-[200px] w-[480px] h-[680px] md:w-[560px] md:h-[780px]"
+          className="hidden sm:block absolute bottom-0 -left-[80px] md:-left-[200px] w-[220px] h-[320px] md:w-[560px] md:h-[780px]"
           style={{ opacity: 0.18 }}
         >
-          {/* Gradient mask: fade to the right & top */}
           <div
             className="absolute inset-0 z-10"
             style={{
               background:
-                'linear-gradient(to right, transparent 45%, var(--bg-primary) 80%), ' +
+                'linear-gradient(to right, transparent 40%, var(--bg-primary) 85%), ' +
                 'linear-gradient(to top, var(--bg-primary) 0%, transparent 30%)',
             }}
           />
@@ -43,17 +41,16 @@ export default function Home() {
           />
         </div>
 
-        {/* ── ICT class logo — right side, centred vertically ── */}
+        {/* ── ICT class logo — right side (hidden on very small screens) ── */}
         <div
-          className="absolute top-1/2 -translate-y-1/2 right-0 w-[300px] h-[300px] md:w-[360px] md:h-[360px]"
+          className="hidden sm:block absolute top-1/2 -translate-y-1/2 -right-[10px] md:right-0 w-[140px] h-[140px] md:w-[360px] md:h-[360px]"
           style={{ opacity: 0.12 }}
         >
-          {/* Gradient mask: fade to the left */}
           <div
             className="absolute inset-0 z-10"
             style={{
               background:
-                'linear-gradient(to right, var(--bg-primary) 0%, transparent 40%), ' +
+                'linear-gradient(to right, var(--bg-primary) 0%, transparent 45%), ' +
                 'radial-gradient(ellipse at center, transparent 40%, var(--bg-primary) 100%)',
             }}
           />
@@ -67,15 +64,16 @@ export default function Home() {
       </div>
       {/* ────────────────────────────────────────────────────────── */}
 
-      <div className="max-w-lg mx-auto relative z-10">
+      {/* Content — full width on mobile, capped on larger screens */}
+      <div className="w-full max-w-xl mx-auto relative z-10">
 
         {/* Header */}
-        <header className="mb-8 md:mb-10">
+        <header className="mb-6 md:mb-10">
 
           {/* Top bar: Logo + Language */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden ring-1 ring-white/10">
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl overflow-hidden ring-1 ring-white/10 flex-shrink-0">
                 <Image
                   src="/ICTA+.png"
                   alt="ICTA+"
@@ -92,23 +90,14 @@ export default function Home() {
             <LanguageToggle />
           </div>
 
-          {/* Title */}
-          <div className="text-center space-y-3">
-            <h1 className="text-3xl md:text-4xl font-extrabold gradient-text tracking-tight leading-tight">
-              {t('title')}
-            </h1>
-            <p className="text-sm md:text-base text-gray-400 font-light max-w-sm mx-auto leading-relaxed sinhala">
-              {t('subtitle')}
-            </p>
-          </div>
         </header>
 
         {/* Calculator */}
         <Calculator />
 
         {/* Footer */}
-        <footer className="mt-10 pt-6 text-center">
-          <div className="divider mb-4" />
+        <footer className="mt-8 pt-5 text-center">
+          <div className="divider mb-3" />
           <p className="text-xs text-gray-600">
             &copy; {new Date().getFullYear()} ICTA+ &middot; Nivindu Lakshitha
           </p>

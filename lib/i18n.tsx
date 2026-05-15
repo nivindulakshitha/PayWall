@@ -1,7 +1,7 @@
-// lib/i18n.ts
+// lib/i18n.tsx
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { translations, Language } from './translations'
 
 interface I18nContextType {
@@ -15,17 +15,13 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined)
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('si') // Default: Sinhala
 
+  // Set data-lang on <html> on mount and on every change
+  useEffect(() => {
+    document.documentElement.setAttribute('data-lang', language)
+  }, [language])
+
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang)
-    // Toggle UN-Malithi font for Sinhala via CSS attribute selector
-    if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-lang', lang)
-    }
-  }
-
-  // Set initial data-lang on mount
-  if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-lang', language)
   }
 
   const t = (key: string): string => {

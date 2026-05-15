@@ -27,7 +27,7 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
   }
 
   const handleShare = () => {
-    const message = generateWhatsAppMessage(
+    let message = generateWhatsAppMessage(
       inputs,
       breakdown,
       getGradeLabel(),
@@ -35,6 +35,22 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       `${inputs.frequency}x/week`,
       `${inputs.students}`
     )
+
+    // Generate link
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams({
+        g: inputs.grade,
+        d: inputs.distance.toString(),
+        m: inputs.method,
+        f: inputs.frequency.toString(),
+        h: (inputs.hours || 2).toString(),
+        s: inputs.students.toString(),
+      })
+      const link = `${window.location.origin}${window.location.pathname}?${params.toString()}`
+      
+      const linkText = t('messages.linkText') || '[ View & Edit Calculation ]\n'
+      message += `\n\n${linkText}${link}`
+    }
 
     const encodedMessage = encodeURIComponent(message)
     const whatsappUrl = `https://wa.me/94787124080?text=${encodedMessage}`
