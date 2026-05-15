@@ -107,7 +107,7 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
           </div>
 
           {/* Fuel Charge */}
-          {breakdown.distanceSurcharge > 0 && (
+          {breakdown.fuelCharge > 0 && (
             <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.fuelCharge')}</p>
@@ -115,18 +115,18 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
                   {breakdown.distanceKm}km × 2 (round trip) × Rs.{FUEL_CHARGE_PER_KM}/km × {frequency}x × 4w
                 </p>
               </div>
-              <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.distanceSurcharge)}</p>
+              <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.fuelCharge)}</p>
             </div>
           )}
 
           {/* Student Charge */}
-          {breakdown.fuelCharge > 0 && (
+          {breakdown.studentCharge > 0 && (
             <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.studentCharge')}</p>
                 <p className="text-[11px] text-gray-500 mt-0.5">{breakdown.studentMultiplier} x Rs.{breakdown.studentRate}</p>
               </div>
-              <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.fuelCharge)}</p>
+              <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.studentCharge)}</p>
             </div>
           )}
 

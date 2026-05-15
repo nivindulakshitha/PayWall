@@ -13,7 +13,7 @@ interface I18nContextType {
 const I18nContext = createContext<I18nContextType | undefined>(undefined)
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('si') // Default: Sinhala
+  const [language, setLanguage] = useState<Language>('en') // Default: English
 
   // Set data-lang on <html> on mount and on every change
   useEffect(() => {
