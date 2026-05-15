@@ -179,9 +179,6 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectHours')}</p>
             <div>
-              <label className="block text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">
-                {t('labels.hours')}
-              </label>
               <div className="flex items-center gap-3">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
@@ -227,9 +224,6 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectStudents')}</p>
             <div>
-              <label className="block text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">
-                {t('labels.students')}
-              </label>
               <div className="flex items-center gap-3">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
