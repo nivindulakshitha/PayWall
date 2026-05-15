@@ -21,6 +21,7 @@ export default function Calculator() {
     frequency: 1,
     students: 1,
     hours: 2, // Default for O/L is 2 hours
+    examYear: 2026,
   })
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function Calculator() {
           frequency: parseInt(params.get('f') || '1', 10),
           hours: parseInt(params.get('h') || '2', 10),
           students: parseInt(params.get('s') || '1', 10),
+          examYear: parseInt(params.get('y') || '2026', 10),
         })
         setShowResults(true)
       }
@@ -50,6 +52,7 @@ export default function Calculator() {
 
   const steps = [
     { id: 'grade', label: t('steps.grade'), icon: '01' },
+    { id: 'examYear', label: t('steps.examYear'), icon: 'Y' },
     { id: 'method', label: t('steps.method'), icon: '02' },
     { id: 'location', label: inputs.method === 'online' ? t('steps.payment') : t('steps.location'), icon: '03' },
     { id: 'frequency', label: t('steps.frequency'), icon: '04' },
@@ -59,7 +62,12 @@ export default function Calculator() {
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1)
+      // Skip examYear for grade 6-9
+      if (currentStep === 0 && inputs.grade === '6-9') {
+        setCurrentStep(2)
+      } else {
+        setCurrentStep(currentStep + 1)
+      }
     } else {
       setShowResults(true)
       setEditMode(false)
@@ -68,7 +76,12 @@ export default function Calculator() {
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1)
+      // Skip examYear for grade 6-9
+      if (currentStep === 2 && inputs.grade === '6-9') {
+        setCurrentStep(0)
+      } else {
+        setCurrentStep(currentStep - 1)
+      }
     }
   }
 
@@ -267,25 +280,40 @@ export default function Calculator() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="glass-card"
+              className="glass-card relative overflow-hidden"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('results.summary')}</h3>
-                <span className="text-xs font-bold text-gray-600">tap to edit</span>
+              {/* Decorative background fee */}
+              <div className="absolute -bottom-8 -right-4 pointer-events-none select-none z-0 opacity-[0.04] blur-[3px] transition-all duration-700">
+                <span className="text-[100px] md:text-[140px] font-black tracking-tighter leading-none text-white italic">
+                  {breakdown.monthlyFee.toLocaleString('en-LK')}
+                </span>
+              </div>
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">{t('results.summary')}</h3>
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                    <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-tight">interactive</span>
+                  </div>
+                </div>
+                <p className="text-[11px] text-gray-500 font-medium">
+                  {t('results.summaryInstruction')}
+                </p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                 {[
                   { label: t('labels.grade'), value: inputs.grade === 'al' ? 'A/L' : inputs.grade === 'ol' ? 'O/L' : '6-9', step: 0, color: 'indigo' },
-                  { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 1, color: 'cyan' },
+                  ...(inputs.grade !== '6-9' ? [{ label: t('labels.examYear'), value: `${inputs.examYear}`, step: 1, color: 'orange' }] : []),
+                  { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 2, color: 'cyan' },
                   { 
                     label: t('labels.location'), 
                     value: inputs.method === 'online' ? t('labels.notApplicable') : `${inputs.distance + 7}km`, 
-                    step: 2, 
+                    step: 3, 
                     color: 'blue' 
                   },
-                  { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 3, color: 'violet' },
-                  { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 4, color: 'purple' },
-                  { label: t('labels.students'), value: `${inputs.students}`, step: 5, color: 'fuchsia' },
+                  { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 4, color: 'violet' },
+                  { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 5, color: 'purple' },
+                  { label: t('labels.students'), value: `${inputs.students}`, step: 6, color: 'fuchsia' },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -298,6 +326,23 @@ export default function Calculator() {
                     <p className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors truncate">{item.value}</p>
                   </motion.div>
                 ))}
+
+                {/* Education Note Box - Fills the remaining space */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="col-span-1 md:col-span-2 rounded-2xl p-4 flex items-center justify-center text-center relative overflow-hidden"
+                  style={{ 
+                    background: 'rgba(10, 14, 26, 0.3)', 
+                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    backdropFilter: 'blur(16px)'
+                  }}
+                >
+                  <p className="text-[11px] md:text-xs text-white/90 font-bold leading-relaxed max-w-[280px]">
+                    {t('results.educationNote')}
+                  </p>
+                </motion.div>
               </div>
             </motion.div>
 

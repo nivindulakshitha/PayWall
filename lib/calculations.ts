@@ -7,6 +7,7 @@ export interface FeeCalculationInputs {
   frequency: number // sessions per week
   students: number
   hours?: number // class duration in hours
+  examYear?: number // 2026, 2027, 2028
 }
 
 export interface FeeBreakdown {
@@ -34,9 +35,13 @@ const BASE_FEES: Record<string, number> = {
 
 const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
   '6-9': 250,   // Rs. 250 per student
-  'ol': 500,    // Rs. 500 per student
-  'al': 750,   // Rs. 750 per student
+  'ol_2026': 500,
+  'ol_future': 750,
+  'al_2026': 750,
+  'al_future': 1000,
 }
+
+export const EXAM_YEARS = [2026, 2027, 2028] as const;
 
 const DISTANCE_CONSTANT_KM = 7
 
@@ -86,11 +91,18 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   }
 
   // Student charge: Grade-based multiplier × number of students (Applies to both Online & Physical)
-  const studentMultiplierRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
+  // Student charge: Grade-based multiplier × number of students (Applies to both Online & Physical)
+  let studentMultiplierRate = STUDENT_MULTIPLIER_RATES['6-9']
+  if (grade === 'ol') {
+    studentMultiplierRate = inputs.examYear && inputs.examYear > 2026 ? STUDENT_MULTIPLIER_RATES['ol_future'] : STUDENT_MULTIPLIER_RATES['ol_2026']
+  } else if (grade === 'al') {
+    studentMultiplierRate = inputs.examYear && inputs.examYear > 2026 ? STUDENT_MULTIPLIER_RATES['al_future'] : STUDENT_MULTIPLIER_RATES['al_2026']
+  }
+  
   studentCharge = studentMultiplierRate * students
 
   // Get student rate for display
-  const studentRate = STUDENT_MULTIPLIER_RATES[grade] || STUDENT_MULTIPLIER_RATES['6-9']
+  const studentRate = studentMultiplierRate
 
   // Frequency surcharge (+10% per extra session beyond 1x/week)
   let frequencySurcharge = 0
@@ -176,7 +188,7 @@ export function generateWhatsAppMessage(
   const totalDistance = inputs.distance + 7
 
   return `*${t('results.feeSummary')}*
-- ${t('results.grade')}: ${gradeLabel}
+- ${t('results.grade')}: ${gradeLabel}${inputs.grade !== '6-9' ? ` (${inputs.examYear})` : ''}
 - ${t('results.method')}: ${methodLabel}
 ${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km\n` : ''}- ${t('results.frequency')}: ${frequencyLabel}
 - ${t('results.duration')}: ${breakdown.hours}hrs

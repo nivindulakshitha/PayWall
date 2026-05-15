@@ -10,6 +10,7 @@ export const translations = {
     language: "English",
     steps: {
       grade: "Select Grade",
+      examYear: "Examination Year",
       location: "Location Details",
       payment: "Payment Info",
       method: "Class Method",
@@ -20,6 +21,7 @@ export const translations = {
     },
     labels: {
       grade: "Grade Level",
+      examYear: "Exam Year",
       location: "Total distance (km)",
       method: "Class Method",
       frequency: "Sessions per Week",
@@ -65,6 +67,8 @@ export const translations = {
       total: "Total Amount",
       adjustment: "Rounding Adjustment",
       summary: "Your Selections",
+      summaryInstruction: "Tap the boxes below to adjust and see how the fee changes!",
+      educationNote: "Education is a life-long investment, not an expense. This fee is a contribution for the dedicated effort and personal commitment I invest in your success.",
       paymentDeadline: "Fee payment should be done by the last class day of each month.",
       feeSummary: "Fee Summary",
       accordingly: "Accordingly;",
@@ -89,6 +93,7 @@ export const translations = {
     },
     messages: {
       selectGrade: "Please select your grade level",
+      selectYear: "Select your examination year",
       enterDistance: "Enter distance from Wariyapola",
       selectMethod: "Choose online or physical classes",
       selectFrequency: "Select session frequency",
@@ -119,6 +124,7 @@ export const translations = {
     language: "සිංහල",
     steps: {
       grade: "ශ්‍රේණිය තෝරන්න",
+      examYear: "විභාග වර්ෂය",
       location: "ස්ථානය",
       payment: "ගෙවීම් තොරතුරු",
       notApplicable: "අදාළ නොවේ",
@@ -130,6 +136,7 @@ export const translations = {
     },
     labels: {
       grade: "ශ්‍රේණිය",
+      examYear: "විභාග වර්ෂය",
       location: "මුළු දුර ප්‍රමාණය (කි.මී.)",
       method: "පන්ති පවත්වන ආකාරය",
       frequency: "සතියට දින ගණන",
@@ -174,7 +181,9 @@ export const translations = {
       studentCharge: "සිසුන් සඳහා අයකිරීම",
       total: "මුළු මුදල",
       adjustment: "වටයන ලද ගැලපුම",
-      summary: "ඔබගේ තෝරාගැනීම්",
+      summary: "ඔබගේ තේරීම්",
+      summaryInstruction: "ගාස්තුව වෙනස් වන ආකාරය බැලීමට පහත කොටු මත ක්ලික් කර වෙනස්කම් සිදු කරන්න!",
+      educationNote: "අධ්‍යාපනය යනු ජීවිත කාලය පුරාම පවතින ආයෝජනයකි. මෙම ගාස්තුව ඔබගේ සාර්ථකත්වය වෙනුවෙන් මා දරන වෙහෙසට සහ කැපවීමට දක්වන දායකත්වයකි.",
       paymentDeadline: "ගාස්තු ගෙවීම් සෑම මසකම අවසාන පන්ති දිනයේදී සිදු කිරීමට කාරුණික වන්න",
       feeSummary: "සාරාංශය",
       feeBreakdown: "ගාස්තු විස්තරය",
@@ -199,6 +208,7 @@ export const translations = {
     },
     messages: {
       selectGrade: "කරුණාකර ඔබගේ ශ්‍රේණිය තෝරන්න",
+      selectYear: "ඔබගේ විභාග වර්ෂය තෝරන්න",
       enterDistance: "වාරියපොල නගරයේ සිට ඔබගේ නිවසට ඇති දුර ඇතුළත් කරන්න",
       selectMethod: "අන්තර්ජාලය හරහා හෝ නිවසට පැමිණ පන්ති තෝරන්න",
       selectFrequency: "සතියට පවත්වන දින ගණන තෝරන්න",
