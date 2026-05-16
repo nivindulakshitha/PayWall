@@ -132,7 +132,7 @@ export const translations = {
       payment: "ගෙවීම් තොරතුරු",
       notApplicable: "අදාළ නොවේ",
       method: "පන්ති පවත්වන ආකාරය",
-      frequency: "මසකට දින ගණන",
+      frequency: "මාසයක් සදහා දින ගණන",
       hours: "පන්තියේ කාලසීමාව",
       students: "සිසුන් ගණන",
       summary: "ගාස්තු සාරාංශය"
@@ -142,7 +142,7 @@ export const translations = {
       examYear: "විභාග වර්ෂය",
       location: "මුළු දුර ප්‍රමාණය (කි.මී.)",
       method: "පන්ති පවත්වන ආකාරය",
-      frequency: "මසකට දින ගණන",
+      frequency: "මාසයක් සදහා දින ගණන",
       hours: "පන්තියේ කාලසීමාව (පැය)",
       students: "සිසුන් ගණන",
       payingFrequency: "ගාස්තු ගෙවන ආකාරය",
@@ -217,7 +217,7 @@ export const translations = {
       selectYear: "ඔබගේ විභාග වර්ෂය තෝරන්න",
       enterDistance: "වාරියපොල නගරයේ සිට ඔබගේ නිවසට ඇති දුර ඇතුළත් කරන්න",
       selectMethod: "අන්තර්ජාලය හරහා හෝ නිවසට පැමිණ පන්ති තෝරන්න",
-      selectFrequency: "මසකට පවත්වන දින ගණන තෝරන්න",
+      selectFrequency: "මාසයක් සදහා පවත්වන දින ගණන තෝරන්න",
       selectHours: "පන්තියේ කාලසීමාව තෝරන්න",
       selectStudents: "සිසුන් ගණන තෝරන්න",
       copiedToClipboard: "පිටපත් කරගන්නා ලදී!",
@@ -228,7 +228,7 @@ export const translations = {
       monthly: "මාසිකව",
       perSession: "දිනකට"
     },
-    whatsappMessage: "පන්ති ගාස්තු ගණකය\n\nශ්‍රේණිය: {grade}\nපන්ති ක්‍රමය: {method}\nදුර: {distance}කි.මී.\nදින ගණන: මසකට දින {frequency}\nසිසුන් ගණන: {students}\n\nමාසික ගාස්තුව: රු. {monthlyFee}\nඑක් දිනකට: රු. {sessionFee}\n\nඅමතන්න: 0787124080",
+    whatsappMessage: "පන්ති ගාස්තු ගණකය\n\nශ්‍රේණිය: {grade}\nපන්ති ක්‍රමය: {method}\nදුර: {distance}කි.මී.\nදින ගණන: මාසයක් සදහා දින {frequency}\nසිසුන් ගණන: {students}\n\nමාසික ගාස්තුව: රු. {monthlyFee}\nඑක් දිනකට: රු. {sessionFee}\n\nඅමතන්න: 0787124080",
     bank: {
       title: "අන්තර්ජාල පන්ති සඳහා බැංකු විස්තර",
       account: "ගිණුම් අංකය: 0088532455",
