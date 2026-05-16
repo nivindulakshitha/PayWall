@@ -177,7 +177,6 @@ export function generateWhatsAppMessage(
   breakdown: FeeBreakdown,
   gradeLabel: string,
   methodLabel: string,
-  frequencyLabel: string,
   studentLabel: string,
   language: Language = 'en'
 ): string {
