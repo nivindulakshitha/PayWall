@@ -209,5 +209,5 @@ ${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK
 » _${t('results.paymentDeadline')}_
 ${inputs.method === 'online' ? `\n» *${t('results.bankDetails')}*\n${t('bank.bank')}\n${t('bank.branch')}\n${t('bank.account')}\n${t('bank.holder')}\n` : ''}
 » *${t('results.contact')}: 0787124080*
-${inputs.students > 1 ? `\n> _${t('results.shareNote')}_` : ''}`
+${inputs.students > 1 ? `\n> _${t('results.shareNote')}_\n` : ''}`
 }
