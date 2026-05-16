@@ -18,7 +18,7 @@ export default function Calculator() {
     grade: 'ol',
     distance: 0,
     method: 'physical',
-    frequency: 1,
+    frequency: 4,
     students: 1,
     hours: 2, // Default for O/L is 2 hours
     examYear: 2026,
@@ -32,7 +32,7 @@ export default function Calculator() {
           grade: (params.get('g') || 'ol') as '6-9' | 'ol' | 'al',
           distance: parseFloat(params.get('d') || '0'),
           method: (params.get('m') || 'physical') as 'online' | 'physical',
-          frequency: parseInt(params.get('f') || '1', 10),
+          frequency: parseInt(params.get('f') || '4', 10),
           hours: parseInt(params.get('h') || '2', 10),
           students: parseInt(params.get('s') || '1', 10),
           examYear: parseInt(params.get('y') || '2026', 10),
@@ -93,7 +93,7 @@ export default function Calculator() {
       grade: 'ol',
       distance: 0,
       method: 'physical',
-      frequency: 1,
+      frequency: 4,
       students: 1,
     })
   }
@@ -311,7 +311,7 @@ export default function Calculator() {
                     step: 3, 
                     color: 'blue' 
                   },
-                  { label: t('labels.frequency'), value: `${inputs.frequency}x/week`, step: 4, color: 'violet' },
+                  { label: t('labels.frequency'), value: `${inputs.frequency} days`, step: 4, color: 'violet' },
                   { label: t('labels.hours'), value: `${inputs.hours || 2}hrs`, step: 5, color: 'purple' },
                   { label: t('labels.students'), value: `${inputs.students}`, step: 6, color: 'fuchsia' },
                 ].map((item, idx) => (

@@ -10,11 +10,11 @@ interface FeeBreakdownProps {
   frequency?: number // sessions per week for per-day calculation
 }
 
-export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakdownProps) {
+export default function FeeBreakdownCard({ breakdown, frequency = 4 }: FeeBreakdownProps) {
   const { t } = useLanguage()
 
-  // Calculate one day fee: monthly fee / (sessions per week * 4 weeks)
-  const sessionsPerMonth = frequency * 4
+  // Calculate one day fee: monthly fee / sessions per month
+  const sessionsPerMonth = frequency
   const oneDayFee = Math.ceil(breakdown.monthlyFee / sessionsPerMonth)
 
   const containerVariants = {
@@ -160,7 +160,7 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.fuelCharge')}</p>
                 <p className="text-[11px] text-gray-500 mt-0.5">
-                  {breakdown.distanceKm}km × 2 (round trip) × Rs.{FUEL_CHARGE_PER_KM}/km × {frequency}x × 4w
+                  {breakdown.distanceKm}km × 2 (round trip) × Rs.{FUEL_CHARGE_PER_KM}/km × {frequency} days
                 </p>
               </div>
               <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.fuelCharge)}</p>

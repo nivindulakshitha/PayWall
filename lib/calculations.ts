@@ -4,7 +4,7 @@ export interface FeeCalculationInputs {
   grade: '6-9' | 'ol' | 'al'
   distance: number // in km
   method: 'online' | 'physical'
-  frequency: number // sessions per week
+  frequency: number // sessions per month
   students: number
   hours?: number // class duration in hours
   examYear?: number // 2026, 2027, 2028
@@ -85,9 +85,9 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   const totalDistance = distance + DISTANCE_CONSTANT_KM
 
   if (method === 'physical') {
-    // Fuel charge: totalDistance × 2 (round trip) × Rs.FUEL_CHARGE_PER_KM/km × frequency × 4 weeks
+    // Fuel charge: totalDistance × 2 (round trip) × Rs.FUEL_CHARGE_PER_KM/km × frequency (sessions per month)
     const roundTripDistance = totalDistance * FUEL_ROUND_TRIP_MULTIPLIER
-    fuelCharge = roundTripDistance * FUEL_CHARGE_PER_KM * frequency * 4
+    fuelCharge = roundTripDistance * FUEL_CHARGE_PER_KM * frequency
   }
 
   // Student charge: Grade-based multiplier × number of students (Applies to both Online & Physical)
@@ -104,10 +104,10 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
   // Get student rate for display
   const studentRate = studentMultiplierRate
 
-  // Frequency surcharge (+10% per extra session beyond 1x/week)
+  // Frequency surcharge (+10% per extra session beyond 4x/month)
   let frequencySurcharge = 0
-  if (frequency > 1) {
-    const extraSessions = frequency - 1
+  if (frequency > 4) {
+    const extraSessions = (frequency - 4) / 4
     frequencySurcharge = baseFee * FREQUENCY_SURCHARGE_PERCENT * extraSessions
   }
 
@@ -186,20 +186,19 @@ export function generateWhatsAppMessage(
   }
 
   const totalDistance = inputs.distance + 7
+  const roundTripDistance = totalDistance * 2
 
   return `*${t('results.feeSummary')}*
 - ${t('results.grade')}: ${gradeLabel}${inputs.grade !== '6-9' ? ` (${inputs.examYear})` : ''}
 - ${t('results.method')}: ${methodLabel}
-${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km\n` : ''}- ${t('results.frequency')}: ${frequencyLabel}
+${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km\n` : ''}- ${t('results.frequency')}: ${inputs.frequency} ${language === 'en' ? 'days' : 'දින'}
 - ${t('results.duration')}: ${breakdown.hours}hrs
 - ${t('results.students')}: ${studentLabel}
 
 *${t('results.feeBreakdown')}*
 - ${t('results.baseFee')}: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
-${breakdown.fuelCharge > 0 ? `- ${t('results.fuelCharge')}: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')}\n` : ''}- ${t('results.studentCharge')} (${inputs.students}x): Rs. ${breakdown.studentCharge.toLocaleString('en-LK')}
-- ${t('results.frequencySurcharge')}: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}
-${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Rs. ${breakdown.perStudentAdjustment.toFixed(0)} x ${inputs.students})\n` : ''}
-${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')}\n` : ''}
+${breakdown.fuelCharge > 0 ? `- ${t('results.fuelCharge')}: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')} (${roundTripDistance}km × Rs.${FUEL_CHARGE_PER_KM} × ${inputs.frequency} days)\n` : ''}- ${t('results.studentCharge')}: Rs. ${breakdown.studentCharge.toLocaleString('en-LK')} (Rs. ${breakdown.studentRate} × ${inputs.students} students)
+${breakdown.frequencySurcharge > 0 ? `- ${t('results.frequencySurcharge')}: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')} (10% per session > 4)\n` : ''}${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')} (10% extra per hour)\n` : ''}${breakdown.groupDiscount > 0 ? `- ${t('results.groupDiscount')}: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')} (${inputs.students >= 3 ? '10%' : '5%'} off)\n` : ''}${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Round per student to 100)\n` : ''}
 *» ${t('results.accordingly')}*
 ${t('results.monthlyFee')}: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
 ${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*

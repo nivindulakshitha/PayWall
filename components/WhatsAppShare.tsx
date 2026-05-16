@@ -32,7 +32,7 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       breakdown,
       getGradeLabel(),
       getMethodLabel(),
-      `${inputs.frequency}x/week`,
+      `${inputs.frequency} ${language === 'en' ? 'days' : 'දින'}`,
       `${inputs.students}`,
       language
     )
