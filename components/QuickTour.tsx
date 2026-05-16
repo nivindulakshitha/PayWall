@@ -61,7 +61,7 @@ export default function QuickTour() {
                   <div>
                     <h4 className="text-sm font-bold text-white mb-1">සිංහල භාෂාව (Sinhala)</h4>
                     <p className="text-xs text-gray-400 leading-relaxed font-medium">
-                      මෙම බොත්තම එබීමෙන් ඔබට සිංහල භාෂාවට මාරු විය හැක.
+                      මෙමගින් ඔබට සියලු විස්තර සිංහල භාෂාවෙන් ලබා ගත හැකිය.
                     </p>
                   </div>
                 </div>

@@ -56,11 +56,11 @@ export default function LanguageToggle() {
         {showTour && (
           <>
             {/* Global backdrop to handle dismissal */}
-            <div 
-              className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-[1px]" 
+            <div
+              className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-[1px]"
               onClick={dismissTour}
             />
-            
+
             <motion.div
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -70,7 +70,7 @@ export default function LanguageToggle() {
               <div className="glass-card-elevated !p-5 shadow-2xl shadow-indigo-500/20 border-indigo-500/30 sinhala">
                 {/* Arrow */}
                 <div className="absolute -top-1.5 right-6 w-3 h-3 bg-[#111827] border-t border-l border-indigo-500/30 rotate-45" />
-                
+
                 <div className="flex items-start gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center flex-shrink-0 text-indigo-400">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -80,11 +80,11 @@ export default function LanguageToggle() {
                   <div>
                     <h4 className="text-sm font-bold text-white mb-1">සිංහල භාෂාව (Sinhala)</h4>
                     <p className="text-xs text-gray-400 leading-relaxed font-medium">
-                      මෙම බොත්තම එබීමෙන් ඔබට සියලු විස්තර සිංහල භාෂාවෙන් බැලිය හැක.
+                      මෙමගින් ඔබට සියලු විස්තර සිංහල භාෂාවෙන් ලබා ගත හැකිය.
                     </p>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={dismissTour}
                   className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all uppercase tracking-widest active:scale-95 shadow-lg shadow-indigo-600/20"
