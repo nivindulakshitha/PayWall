@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FeeCalculationInputs, EXAM_YEARS } from '@/lib/calculations'
+import { FeeCalculationInputs, EXAM_YEARS, DISTANCE_CONSTANT_KM } from '@/lib/calculations'
 import { useLanguage } from '@/lib/i18n'
 
 interface StepFormProps {
@@ -224,7 +224,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
               </div>
               <div className="mt-3 p-3 rounded-lg" style={{ background: 'rgba(99, 102, 241, 0.06)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
                 <p className="text-sm font-bold text-indigo-300/80">
-                  Total: {inputs.distance + 7}km (distance + 7km constant)
+                  Total: {inputs.distance + DISTANCE_CONSTANT_KM}km (distance + {DISTANCE_CONSTANT_KM}km constant)
                 </p>
               </div>
             </div>
@@ -235,21 +235,21 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
         return (
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-sm text-gray-400">{t('messages.selectFrequency')}</p>
-            <div className="grid grid-cols-3 gap-2.5">
-              {[1, 2, 3].map((freq) => (
+            <div className="grid grid-cols-2 gap-3">
+              {[4, 6, 8, 12].map((freq) => (
                 <motion.button
                   key={freq}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleChange('frequency', freq)}
-                  className={`option-card text-center py-5 flex flex-col items-center justify-center min-h-[120px] ${
+                  className={`option-card text-center py-5 flex flex-col items-center justify-center min-h-[100px] ${
                     inputs.frequency === freq ? 'option-card-active' : ''
                   }`}
                 >
                   <p className={`text-3xl font-black mb-1 ${inputs.frequency === freq ? 'text-indigo-300' : 'text-gray-300'} transition-colors`}>
-                    {freq}x
+                    {freq}
                   </p>
-                  <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">/ week</p>
+                  <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">days / month</p>
                 </motion.button>
               ))}
             </div>

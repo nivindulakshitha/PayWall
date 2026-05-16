@@ -10,11 +10,11 @@ interface FeeBreakdownProps {
   frequency?: number // sessions per week for per-day calculation
 }
 
-export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakdownProps) {
+export default function FeeBreakdownCard({ breakdown, frequency = 4 }: FeeBreakdownProps) {
   const { t } = useLanguage()
 
-  // Calculate one day fee: monthly fee / (sessions per week * 4 weeks)
-  const sessionsPerMonth = frequency * 4
+  // Calculate one day fee: monthly fee / sessions per month
+  const sessionsPerMonth = frequency
   const oneDayFee = Math.ceil(breakdown.monthlyFee / sessionsPerMonth)
 
   const containerVariants = {
@@ -160,7 +160,7 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
               <div>
                 <p className="text-sm font-medium text-gray-200">{t('results.fuelCharge')}</p>
                 <p className="text-[11px] text-gray-500 mt-0.5">
-                  {breakdown.distanceKm}km × 2 (round trip) × Rs.{FUEL_CHARGE_PER_KM}/km × {frequency}x × 4w
+                  {breakdown.distanceKm}km × 2 (round trip) × Rs.{FUEL_CHARGE_PER_KM}/km × {frequency} days
                 </p>
               </div>
               <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.fuelCharge)}</p>
@@ -182,10 +182,21 @@ export default function FeeBreakdownCard({ breakdown, frequency = 1 }: FeeBreakd
           {breakdown.frequencySurcharge > 0 && (
             <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
               <div>
-                <p className="text-sm font-medium text-gray-200">{t('results.frequencySurcharge')}</p>
+                <div className="flex items-center gap-2">
+                  <p className={`text-sm font-medium ${breakdown.isFrequencySurchargeWaived ? 'text-gray-500 line-through' : 'text-gray-200'}`}>
+                    {t('results.frequencySurcharge')}
+                  </p>
+                  {breakdown.isFrequencySurchargeWaived && (
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-tighter sinhala">
+                      {t('results.waived')}
+                    </span>
+                  )}
+                </div>
                 <p className="text-[11px] text-gray-500 mt-0.5">{t('results.frequencyDesc')}</p>
               </div>
-              <p className="text-sm font-semibold text-amber-400 tabular-nums">+ {formatCurrency(breakdown.frequencySurcharge)}</p>
+              <p className={`text-sm font-semibold tabular-nums ${breakdown.isFrequencySurchargeWaived ? 'text-gray-500 line-through decoration-emerald-500/50' : 'text-amber-400'}`}>
+                {breakdown.isFrequencySurchargeWaived ? formatCurrency(breakdown.frequencySurcharge) : `+ ${formatCurrency(breakdown.frequencySurcharge)}`}
+              </p>
             </div>
           )}
 
