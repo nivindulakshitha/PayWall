@@ -2,7 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FeeCalculationInputs, EXAM_YEARS } from '@/lib/calculations'
+import { FeeCalculationInputs, EXAM_YEARS, DISTANCE_CONSTANT_KM } from '@/lib/calculations'
 import { useLanguage } from '@/lib/i18n'
 
 interface StepFormProps {
@@ -224,7 +224,7 @@ export default function StepForm({ step, inputs, setInputs, onGradeChange }: Ste
               </div>
               <div className="mt-3 p-3 rounded-lg" style={{ background: 'rgba(99, 102, 241, 0.06)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
                 <p className="text-sm font-bold text-indigo-300/80">
-                  Total: {inputs.distance + 7}km (distance + 7km constant)
+                  Total: {inputs.distance + DISTANCE_CONSTANT_KM}km (distance + {DISTANCE_CONSTANT_KM}km constant)
                 </p>
               </div>
             </div>

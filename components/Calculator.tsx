@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { calculateFees, FeeCalculationInputs } from '@/lib/calculations'
+import { calculateFees, FeeCalculationInputs, DISTANCE_CONSTANT_KM } from '@/lib/calculations'
 import { useLanguage } from '@/lib/i18n'
 import StepForm from './StepForm'
 import FeeBreakdown from './FeeBreakdown'
@@ -307,7 +307,7 @@ export default function Calculator() {
                   { label: t('labels.method'), value: inputs.method === 'online' ? t('methods.online') : t('methods.physical'), step: 2, color: 'cyan' },
                   { 
                     label: t('labels.location'), 
-                    value: inputs.method === 'online' ? t('labels.notApplicable') : `${inputs.distance + 7}km`, 
+                    value: inputs.method === 'online' ? t('labels.notApplicable') : `${inputs.distance + DISTANCE_CONSTANT_KM}km`, 
                     step: 3, 
                     color: 'blue' 
                   },

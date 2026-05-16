@@ -25,12 +25,13 @@ export interface FeeBreakdown {
   distanceKm?: number // For display: total distance
   hours?: number // For display: class hours
   studentRate?: number // For display: per-student rate from grade
+  isFrequencySurchargeWaived?: boolean
 }
 
 const BASE_FEES: Record<string, number> = {
   '6-9': 2000,
-  'ol': 3000,
-  'al': 5000,
+  'ol': 4000,
+  'al': 6000,
 }
 
 const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
@@ -43,7 +44,7 @@ const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
 
 export const EXAM_YEARS = [2026, 2027, 2028] as const;
 
-const DISTANCE_CONSTANT_KM = 7
+export const DISTANCE_CONSTANT_KM = 8
 
 // Fuel cost calculation
 const FUEL_PRICE_PER_LITRE = 410   // Rs. per litre
@@ -111,8 +112,12 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     frequencySurcharge = baseFee * FREQUENCY_SURCHARGE_PERCENT * extraSessions
   }
 
+  // Waiver for 2026 A/L students
+  const isFrequencySurchargeWaived = grade === 'al' && inputs.examYear === 2026
+  const effectiveFrequencySurcharge = isFrequencySurchargeWaived ? 0 : frequencySurcharge
+
   // Monthly subtotal before discount
-  const subtotalBeforeDiscount = baseFee + fuelCharge + studentCharge + frequencySurcharge + hoursSurcharge
+  const subtotalBeforeDiscount = baseFee + fuelCharge + studentCharge + effectiveFrequencySurcharge + hoursSurcharge
 
   // Group discount based on number of students
   let groupDiscount = 0
@@ -153,6 +158,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
     distanceKm: totalDistance,
     hours: classHours,
     studentRate,
+    isFrequencySurchargeWaived,
   }
 }
 
@@ -185,7 +191,7 @@ export function generateWhatsAppMessage(
     return String(val)
   }
 
-  const totalDistance = inputs.distance + 7
+  const totalDistance = inputs.distance + DISTANCE_CONSTANT_KM
   const roundTripDistance = totalDistance * 2
 
   return `*${t('results.feeSummary')}*
@@ -198,7 +204,7 @@ ${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km
 *${t('results.feeBreakdown')}*
 - ${t('results.baseFee')}: Rs. ${breakdown.baseFee.toLocaleString('en-LK')}
 ${breakdown.fuelCharge > 0 ? `- ${t('results.fuelCharge')}: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')} (${roundTripDistance}km × Rs.${FUEL_CHARGE_PER_KM} × ${inputs.frequency} days)\n` : ''}- ${t('results.studentCharge')}: Rs. ${breakdown.studentCharge.toLocaleString('en-LK')} (Rs. ${breakdown.studentRate} × ${inputs.students} students)
-${breakdown.frequencySurcharge > 0 ? `- ${t('results.frequencySurcharge')}: Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')} (10% per session > 4)\n` : ''}${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')} (10% extra per hour)\n` : ''}${breakdown.groupDiscount > 0 ? `- ${t('results.groupDiscount')}: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')} (${inputs.students >= 3 ? '10%' : '5%'} off)\n` : ''}${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Round per student to 100)\n` : ''}
+${breakdown.frequencySurcharge > 0 ? `- ${t('results.frequencySurcharge')}: ${breakdown.isFrequencySurchargeWaived ? `~Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}~ (${t('results.waivedNote')})` : `Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')} (10% per session > 4)`}\n` : ''}${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')} (10% extra per hour)\n` : ''}${breakdown.groupDiscount > 0 ? `- ${t('results.groupDiscount')}: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')} (${inputs.students >= 3 ? '10%' : '5%'} off)\n` : ''}${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Round per student to 100)\n` : ''}
 *» ${t('results.accordingly')}*
 ${t('results.monthlyFee')}: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
 ${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
@@ -208,5 +214,5 @@ ${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK
 » _${t('results.paymentDeadline')}_
 ${inputs.method === 'online' ? `\n» *${t('results.bankDetails')}*\n${t('bank.bank')}\n${t('bank.branch')}\n${t('bank.account')}\n${t('bank.holder')}\n` : ''}
 » *${t('results.contact')}: 0787124080*
-${inputs.students > 1 ? `\n> _${t('results.shareNote')}_\n` : ''}`
+\n> _${inputs.students > 1 ? t('results.shareMessageMulti') : t('results.shareMessageSingle')}_\n`
 }

@@ -69,7 +69,7 @@ export default function WhatsAppShare({ inputs, breakdown }: WhatsAppShareProps)
       <div className="divider" />
 
       <p className="text-center text-xs text-gray-500 font-medium">
-        {t('messages.shareMessage') || 'Please send these details and share with your friends:'}
+        {inputs.students > 1 ? t('results.shareMessageMulti') : t('results.shareMessageSingle')}
       </p>
 
       <motion.button

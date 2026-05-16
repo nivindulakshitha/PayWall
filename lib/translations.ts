@@ -82,7 +82,8 @@ export const translations = {
       perStudent: "Per Student",
       contact: "Contact",
       politeNote: "Feel free to message Sir privately if you have any concerns regarding fee payments.",
-      shareNote: "Share this message with your class mates!",
+      shareMessageSingle: "Please give these details to your teacher!",
+      shareMessageMulti: "Please give these details to your teacher and class mates!",
       bankDetails: "Bank Details",
       baseFeeDesc: "Base monthly fee",
       frequencyDesc: "10% per extra session",
@@ -90,6 +91,8 @@ export const translations = {
       noDiscount: "No discount (1 student)",
       discount2: "5% for 2 students",
       discount3: "10% for 3+ students",
+      waived: "Waived",
+      waivedNote: "Free for 2026 AL"
     },
     messages: {
       selectGrade: "Please select your grade level",
@@ -197,7 +200,8 @@ export const translations = {
       perStudent: "එක් සිසුවෙකු සඳහා",
       contact: "අමතන්න",
       politeNote: "ඉහත ගණනය කිරීමෙහි හෝ ගාස්තු ගෙවීම් සම්බන්ධව අපහසුතා ඇත්නම් කරුණාකර ගුරුතුමාට පෞද්ගලිකව පණිවිඩයක් ලබා දෙන්න.",
-      shareNote: "මෙම පණිවිඩය ඔබේ පන්තියේ මිතුරන් සමඟ බෙදා ගන්න!",
+      shareMessageSingle: "කරුණාකර මෙම විස්තර ඔබගේ ගුරුතුමාට ලබා දෙන්න!",
+      shareMessageMulti: "කරුණාකර මෙම විස්තර ඔබගේ ගුරුතුමාට සහ පන්තියේ ළමුන්ට ලබා දෙන්න!",
       bankDetails: "බැංකු විස්තර",
       baseFeeDesc: "මූලික මාසික ගාස්තුව",
       frequencyDesc: "අමතර දින සඳහා 10% බැගින්",
@@ -205,6 +209,8 @@ export const translations = {
       noDiscount: "වට්ටම් නොමැත",
       discount2: "සිසුන් 2ක් සඳහා 5% වට්ටමක්",
       discount3: "සිසුන් 3+ සඳහා 10% වට්ටමක්",
+      waived: "නිදහස්",
+      waivedNote: "2026 AL සඳහා නොමිලේ"
     },
     messages: {
       selectGrade: "කරුණාකර ඔබගේ ශ්‍රේණිය තෝරන්න",
