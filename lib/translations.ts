@@ -216,7 +216,7 @@ export const translations = {
       selectStudents: "සිසුන් ගණන තෝරන්න",
       copiedToClipboard: "පිටපත් කරගන්නා ලදී!",
       shareMessage: "කරුණාකර මෙම විස්තර ඔබගේ ගුරුතුමාට සහ පන්තියේ ළමුන්ට ලබා දෙන්න!",
-      linkText: "[ගණනය කිරීම් වෙනස් කරන්න]\n"
+      linkText: "[සවිස්තරාත්මක ගණනය කිරීම සඳහා]\n"
     },
     payingFrequencies: {
       monthly: "මාසිකව",
