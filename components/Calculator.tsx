@@ -95,6 +95,8 @@ export default function Calculator() {
       method: 'physical',
       frequency: 4,
       students: 1,
+      hours: 2,
+      examYear: 2026,
     })
   }
 
