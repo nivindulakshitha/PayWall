@@ -39,7 +39,7 @@ const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
   'ol_2026': 500,
   'ol_future': 750,
   'al_2026': 750,
-  'al_future': 1500,
+  'al_future': 1000,
 }
 
 export const EXAM_YEARS = [2026, 2027, 2028] as const;
