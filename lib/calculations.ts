@@ -47,7 +47,7 @@ export const EXAM_YEARS = [2026, 2027, 2028] as const;
 export const DISTANCE_CONSTANT_KM = 8
 
 // Fuel cost calculation
-const FUEL_PRICE_PER_LITRE = 434   // Rs. per litre
+const FUEL_PRICE_PER_LITRE = 414   // Rs. per litre
 const KM_PER_LITRE = 50            // km per litre
 const RAW_COST_PER_KM = FUEL_PRICE_PER_LITRE / KM_PER_LITRE
 // Round UP to next multiple of 5
