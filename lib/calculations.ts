@@ -35,11 +35,11 @@ const BASE_FEES: Record<string, number> = {
 }
 
 const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
-  '6-9': 250,   // Rs. 250 per student
-  'ol_2026': 500,
-  'ol_future': 750,
-  'al_2026': 750,
-  'al_future': 1500,
+  '6-9': 500,   // Rs. 250 per student
+  'ol_2026': 750,
+  'ol_future': 1000,
+  'al_2026': 1000,
+  'al_future': 2000,
 }
 
 export const EXAM_YEARS = [2027, 2028] as const;
@@ -48,14 +48,14 @@ export const DISTANCE_CONSTANT_KM = 10
 
 // Fuel cost calculation
 const FUEL_PRICE_PER_LITRE = 414   // Rs. per litre
-const KM_PER_LITRE = 50            // km per litre
+const KM_PER_LITRE = 30            // km per litre
 const RAW_COST_PER_KM = FUEL_PRICE_PER_LITRE / KM_PER_LITRE
 // Round UP to next multiple of 5
 export const FUEL_CHARGE_PER_KM = Math.ceil(RAW_COST_PER_KM / 6) * 6  // = 10 Rs/km
 
 const FUEL_ROUND_TRIP_MULTIPLIER = 2 // For come and go
-const FREQUENCY_SURCHARGE_PERCENT = 0.2 // 10% per extra session
-const EXTRA_HOURS_SURCHARGE_PERCENT = 0.1 // 10% per extra hour
+const FREQUENCY_SURCHARGE_PERCENT = 0.25 // 10% per extra session
+const EXTRA_HOURS_SURCHARGE_PERCENT = 0.25 // 10% per extra hour
 const DEFAULT_HOURS: Record<string, number> = {
   '6-9': 2,   // 2 hours
   'ol': 2,    // 2 hours
