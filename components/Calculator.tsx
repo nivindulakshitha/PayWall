@@ -43,6 +43,8 @@ export default function Calculator() {
   }, [])
 
   const breakdown = calculateFees(inputs)
+  const oneDayFee = Math.ceil(breakdown.monthlyFee / inputs.frequency)
+  const fourDayFee = oneDayFee * 4
 
   // Update hours when grade changes
   const handleGradeChange = (grade: '6-9' | 'ol' | 'al') => {
@@ -287,7 +289,7 @@ export default function Calculator() {
               {/* Decorative background fee */}
               <div className="absolute -bottom-8 -right-4 pointer-events-none select-none z-0 opacity-[0.04] blur-[3px] transition-all duration-700">
                 <span className="text-[100px] md:text-[140px] font-black tracking-tighter leading-none text-white italic">
-                  {breakdown.monthlyFee.toLocaleString('en-LK')}
+                  {fourDayFee.toLocaleString('en-LK')}
                 </span>
               </div>
               <div className="mb-4">

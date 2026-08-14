@@ -52,6 +52,7 @@ export const translations = {
     },
     results: {
       monthlyFee: "Monthly Fee",
+      fourDayFee: "4 Days Fee",
       perStudentFee: "Per Student Fee",
       oneDayFee: "One Day Fee",
       sessionFee: "Per Session Fee",
@@ -170,6 +171,7 @@ export const translations = {
     },
     results: {
       monthlyFee: "මාසික ගාස්තුව",
+      fourDayFee: "දින 4 සඳහා ගාස්තුව",
       perStudentFee: "එක් සිසුවෙකු සඳහා ගාස්තුව",
       oneDayFee: "එක් දිනක් සඳහා ගාස්තුව",
       sessionFee: "එක් දිනක් සඳහා ගාස්තුව",
