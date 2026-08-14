@@ -192,6 +192,8 @@ export function generateWhatsAppMessage(
 
   const totalDistance = inputs.distance + DISTANCE_CONSTANT_KM
   const roundTripDistance = totalDistance * 2
+  const oneDayFee = Math.ceil(breakdown.monthlyFee / inputs.frequency)
+  const fourDayFee = oneDayFee * 4
 
   return `*${t('results.feeSummary')}*
 - ${t('results.grade')}: ${gradeLabel}${inputs.grade !== '6-9' ? ` (${inputs.examYear})` : ''}
@@ -205,7 +207,9 @@ ${inputs.method === 'physical' ? `- ${t('results.distance')}: ${totalDistance}km
 ${breakdown.fuelCharge > 0 ? `- ${t('results.fuelCharge')}: Rs. ${breakdown.fuelCharge.toLocaleString('en-LK')} (${roundTripDistance}km × Rs.${FUEL_CHARGE_PER_KM} × ${inputs.frequency} days)\n` : ''}- ${t('results.studentCharge')}: Rs. ${breakdown.studentCharge.toLocaleString('en-LK')} (Rs. ${breakdown.studentRate} × ${inputs.students} students)
 ${breakdown.frequencySurcharge > 0 ? `- ${t('results.frequencySurcharge')}: ${breakdown.isFrequencySurchargeWaived ? `~Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')}~ (${t('results.waivedNote')})` : `Rs. ${breakdown.frequencySurcharge.toLocaleString('en-LK')} (10% per session > 4)`}\n` : ''}${breakdown.hoursSurcharge > 0 ? `- ${t('results.hoursSurcharge')}: Rs. ${breakdown.hoursSurcharge.toLocaleString('en-LK')} (10% extra per hour)\n` : ''}${breakdown.groupDiscount > 0 ? `- ${t('results.groupDiscount')}: -Rs. ${breakdown.groupDiscount.toLocaleString('en-LK')} (${inputs.students >= 3 ? '10%' : '5%'} off)\n` : ''}${breakdown.adjustment !== 0 ? `- ${t('results.adjustment')}: Rs. ${breakdown.adjustment.toLocaleString('en-LK')} (Round per student to 100)\n` : ''}
 *» ${t('results.accordingly')}*
-${t('results.monthlyFee')}: *Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}*
+${t('results.fourDayFee')}: *Rs. ${fourDayFee.toLocaleString('en-LK')}*
+${t('results.monthlyFee')}: Rs. ${breakdown.monthlyFee.toLocaleString('en-LK')}
+${t('results.oneDayFee')}: Rs. ${oneDayFee.toLocaleString('en-LK')}
 ${t('results.perStudent')}: *Rs. ${breakdown.perStudentFee.toLocaleString('en-LK')}*
 
 » _${t('results.politeNote')}_
