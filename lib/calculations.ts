@@ -54,8 +54,8 @@ const RAW_COST_PER_KM = FUEL_PRICE_PER_LITRE / KM_PER_LITRE
 export const FUEL_CHARGE_PER_KM = Math.ceil(RAW_COST_PER_KM / 5) * 5  // = 10 Rs/km
 
 const FUEL_ROUND_TRIP_MULTIPLIER = 2 // For come and go
-const FREQUENCY_SURCHARGE_PERCENT = 0.25 // 10% per extra session
-const EXTRA_HOURS_SURCHARGE_PERCENT = 0.25 // 10% per extra hour
+const FREQUENCY_SURCHARGE_PERCENT = 0.33 // 10% per extra session
+const EXTRA_HOURS_SURCHARGE_PERCENT = 0.33 // 10% per extra hour
 const DEFAULT_HOURS: Record<string, number> = {
   '6-9': 2,   // 2 hours
   'ol': 2,    // 2 hours
@@ -134,7 +134,7 @@ export function calculateFees(inputs: FeeCalculationInputs): FeeBreakdown {
 
   // 3. Round per-student fee to nearest 100
   // 2834 -> 2800, 2890 -> 2900, 2850 -> 2900
-  const perStudentFee = Math.ceil(perStudentExact / 100) * 100
+  const perStudentFee = Math.ceil(perStudentExact / 500) * 500
 
   // 4. Final adjusted monthly fee
   const monthlyFee = perStudentFee * students
