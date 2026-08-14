@@ -16,6 +16,8 @@ export default function FeeBreakdownCard({ breakdown, frequency = 4 }: FeeBreakd
   // Calculate one day fee: monthly fee / sessions per month
   const sessionsPerMonth = frequency
   const oneDayFee = Math.ceil(breakdown.monthlyFee / sessionsPerMonth)
+  const fourDayFee = oneDayFee * 4
+  const fourDayPerStudentFee = Math.ceil(fourDayFee / (breakdown.studentMultiplier || 1))
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -40,7 +42,7 @@ export default function FeeBreakdownCard({ breakdown, frequency = 4 }: FeeBreakd
       {/* Hero Fee Visualization */}
       <motion.div variants={itemVariants} className="relative mb-6 p-1">
         <div className="flex items-stretch gap-0 relative">
-          {/* Main Root: Monthly Fee */}
+          {/* Main Root: 4 Day Fee */}
           <div className="z-10 w-[42%]">
             <div 
               className="h-full rounded-2xl p-4 md:p-5 relative overflow-hidden flex flex-col justify-center"
@@ -51,10 +53,10 @@ export default function FeeBreakdownCard({ breakdown, frequency = 4 }: FeeBreakd
               }}
             >
               <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-indigo-500/10 blur-2xl -mr-8 -mt-8" />
-              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] mb-2">{t('results.monthlyFee')}</p>
+              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] mb-2">{t('results.fourDayFee')}</p>
               <div className="flex items-baseline gap-1">
                 <span className="text-2xl md:text-3xl font-black text-white tabular-nums tracking-tight">
-                  Rs. {breakdown.monthlyFee.toLocaleString('en-LK')}
+                  Rs. {fourDayFee.toLocaleString('en-LK')}
                 </span>
               </div>
             </div>
@@ -245,14 +247,14 @@ export default function FeeBreakdownCard({ breakdown, frequency = 4 }: FeeBreakd
           {/* Total */}
           <div className="flex items-center justify-between pt-4 mt-2" style={{ borderTop: '2px solid rgba(255,255,255,0.08)' }}>
             <span className="text-sm font-bold text-white uppercase tracking-wider">{t('results.total')}</span>
-            <span className="text-lg font-extrabold gradient-text-accent tabular-nums">{formatCurrency(breakdown.monthlyFee)}</span>
+            <span className="text-lg font-extrabold gradient-text-accent tabular-nums">{formatCurrency(fourDayFee)}</span>
           </div>
 
           {/* Per Student & Per Day */}
           <div className="mt-4 p-3.5 rounded-xl space-y-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-gray-500">Rs. {breakdown.monthlyFee.toLocaleString('en-LK')} / {breakdown.studentMultiplier} students</span>
-              <span className="font-bold text-purple-400 tabular-nums">{formatCurrency(breakdown.perStudentFee)}</span>
+              <span className="text-gray-500">Rs. {fourDayFee.toLocaleString('en-LK')} / {breakdown.studentMultiplier} students</span>
+              <span className="font-bold text-purple-400 tabular-nums">{formatCurrency(fourDayPerStudentFee)}</span>
             </div>
             <div className="flex items-center justify-between text-xs">
               <span className="text-gray-500">Rs. {breakdown.monthlyFee.toLocaleString('en-LK')} / {sessionsPerMonth} sessions</span>
