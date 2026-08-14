@@ -39,19 +39,19 @@ const STUDENT_MULTIPLIER_RATES: Record<string, number> = {
   'ol_2026': 500,
   'ol_future': 750,
   'al_2026': 750,
-  'al_future': 1000,
+  'al_future': 1500,
 }
 
-export const EXAM_YEARS = [2026, 2027, 2028] as const;
+export const EXAM_YEARS = [2027, 2028] as const;
 
-export const DISTANCE_CONSTANT_KM = 8
+export const DISTANCE_CONSTANT_KM = 10
 
 // Fuel cost calculation
 const FUEL_PRICE_PER_LITRE = 414   // Rs. per litre
 const KM_PER_LITRE = 50            // km per litre
 const RAW_COST_PER_KM = FUEL_PRICE_PER_LITRE / KM_PER_LITRE
 // Round UP to next multiple of 5
-export const FUEL_CHARGE_PER_KM = Math.ceil(RAW_COST_PER_KM / 5) * 5  // = 10 Rs/km
+export const FUEL_CHARGE_PER_KM = Math.ceil(RAW_COST_PER_KM / 6) * 6  // = 10 Rs/km
 
 const FUEL_ROUND_TRIP_MULTIPLIER = 2 // For come and go
 const FREQUENCY_SURCHARGE_PERCENT = 0.2 // 10% per extra session
